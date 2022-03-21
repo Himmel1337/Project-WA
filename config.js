@@ -1,12 +1,12 @@
 module.exports = {
     jwtConfig: {
-        secret: "afasfrqwtr21tfwagsd",
-        algorithms: ["HS256"],
+        secret: 'viv99vfd9vdf09',
+        algorithms: ['HS256']
     },
     passwordConfig: {
-        salt: 'a412rwqetfaq325',
+        salt: 'faacdcojirj90990',
         iterations: 1000,
         keylen: 64,
         digest: 'sha512',
-    }
-}
+    },
+};

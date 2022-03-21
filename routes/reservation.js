@@ -1,19 +1,20 @@
 const express = require("express");
 const router = express.Router();
-const articleService = require('../service/article-service')
+const reservationService = require('../service/reservation-service')
+const userService = require("../service/user-service");
 
 router.get('/', async (req, res) => {
     const order = req.query.order;
-    const articles = await articleService.getAll(order);
-    res.json(articles);
+    const reservations = await reservationService.getAll(order);
+    res.json(reservations);
 })
 
 router.get('/:id', async (req, res) => {
     const id = parseInt(req.params.id);
-    const article = await articleService.getById(id);
+    const reservation = await reservationService.getById(id);
 
-    if (article) {
-        res.json(article);
+    if (reservation) {
+        res.json(reservation);
     } else {
         res.status(404).send("Not found");
     }
@@ -21,18 +22,19 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
     const data = req.body;
+    console.log(req.user);
 
     if (
-        data.title === undefined || data.title?.trim() === "" ||
-        data.text === undefined || data.text?.trim() === ""
+        data.day === undefined || data.day?.trim() === "" ||
+        data.time === undefined || data.time?.trim() === ""
     ) {
         res.status(400).send("Bad input");
         return;
     }
 
-    const article = await articleService.create(data);
+    const reservation = await reservationService.create(data);
 
-    res.status(201).json(article);
+    res.status(201).json(reservation);
 })
 
 router.put('/:id', async (req, res) => {
@@ -41,29 +43,27 @@ router.put('/:id', async (req, res) => {
 
     if (
         isNaN(id) ||
-        data.title === undefined || data.title?.trim() === "" ||
-        data.text === undefined || data.text?.trim() === ""
+        data.day === undefined || data.day?.trim() === "" ||
+        data.time === undefined || data.time?.trim() === ""
     ) {
         res.status(400).send("Bad input");
         return;
     }
 
-    const article = await articleService.update(id, data);
+    const reservation = await reservationService.update(id, data);
 
-    if (!article) {
+    if (!reservation) {
         res.status(404).send("Not found")
         return;
     }
 
-    res.status(202).json(article);
+    res.status(202).json(reservation);
 })
 
 router.delete('/:id', async (req, res) => {
     const id = parseInt(req.params.id);
-    await articleService.delete(id);
+    await reservationService.delete(id);
     res.status(204).send("No Content");
 })
-
-
 
 module.exports = router;
