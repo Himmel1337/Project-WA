@@ -1,5 +1,11 @@
 <template>
   <h1>Reservations</h1>
+  Title: <input v-model = "name"> <br><br>
+  Date: <input type = "date"> <br><br>
+  Add: <input type = "submit">
+  <!--  People: <input type="range">-->
+  <br><br>
+
   <div class="error" v-if="error">
     {{ error }}
     <button @click="error = null">Skrýt</button>
@@ -86,3 +92,30 @@ export default {
   padding: 2em;
 }
 </style>
+
+<!--<script>-->
+<!--export default {-->
+<!--  name: "Reservation",-->
+<!--  data() {-->
+<!--    return {-->
+<!--      reservations: [-->
+<!--        {-->
+<!--          id: 1,-->
+<!--          title: "Reservation A",-->
+<!--          date: "21.04.2021"-->
+<!--        },        {-->
+<!--          id: 2,-->
+<!--          title: "Reservation B",-->
+<!--          date: "18.02.2020"-->
+<!--        },-->
+<!--      ],-->
+<!--      name: "",-->
+<!--    }-->
+<!--  },-->
+<!--  computed: {-->
+<!--    filteredReservation() {-->
+<!--      return this.reservations.filter(a => a.title.includes(this.name));-->
+<!--    }-->
+<!--  }-->
+<!--}-->
+<!--</script>-->
