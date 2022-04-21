@@ -2,7 +2,8 @@
   <nav>
     <router-link :to="{name: 'home'}">Homepage</router-link> |
     <router-link :to="{name: 'reservations'}">Reservations</router-link> |
-    <router-link :to="{name: 'about'}">About</router-link>
+    <router-link :to="{name: 'about'}">About</router-link> |
+    <router-link :to="{name: 'signup'}">Sign up</router-link>
   </nav>
 
   <main>

@@ -1,5 +1,9 @@
 <template>
   <h1>Reservations</h1>
+  Date: <input type="date"/>
+  <br><br>
+  Time: <input type="time"/>
+  <br><br>
   <div class="error" v-if="error">
     {{ error }}
     <button @click="error = null">Hide</button>
