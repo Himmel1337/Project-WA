@@ -4,9 +4,8 @@ POST http://localhost:3000/user/login
 Content-Type: application/json
 
 {
-  "username": "jjj",
-  "password": "heslo",
-  "role": "admin"
+  "username": "xpisarov",
+  "password": "heslo"
 }
 
 ### Register
@@ -15,28 +14,11 @@ POST http://localhost:3000/user
 Content-Type: application/json
 
 {
-  "username": "jjj",
-  "password": "heslo",
-  "role": "admin"
+  "username": "ivo",
+  "password": "heslo"
 }
 
 ### Get info
 
 GET http://localhost:3000/user/info
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InhwaXNhcm92IiwiaWF0IjoxNjQ2NjQ4NTAwfQ.glFwNCz-COBG-B8AiiNAQmjZfwx0haPoz7lxABVQJik
-
-### Update
-
-PUT http://localhost:3000/user/1
-Content-Type: application/json
-
-{
-  "username": "himmmel",
-  "password": "password",
-  "role": "pro"
-}
-
-### Delete
-
-DELETE http://localhost:3000/user/1
-Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InhwaXNhcm92Iiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjQ3MDIyNTIxfQ.gK6wq8e2TVonarPL3YbyRwRFvUHWJ2wCkfmlTSqK1yE

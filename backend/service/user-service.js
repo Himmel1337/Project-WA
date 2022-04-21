@@ -15,6 +15,7 @@ class UserService {
     generateToken(user) {
         const tokenPayload = {
             username: user.username,
+            role: user.role
         };
         return jwt.sign(
             tokenPayload,
@@ -35,40 +36,6 @@ class UserService {
         ).toString(`hex`);
     }
 
-    async getById(id) {
-        return await database().get(
-            "SELECT * FROM users WHERE id = ?",
-            id
-        );
-    }
-
-    async create(user) {
-        const result = await database().run(
-            "INSERT INTO users (username, password, role) VALUES (?, ?, ?)",
-            user.username, user.password, user.role
-        );
-        return await this.getById(result.lastID);
-    }
-
-    async update(id, user) {
-        const result = await database().run(
-            "UPDATE users SET username = ?, password = ?, role = ? WHERE id = ?",
-            user.username, user.password, user.role, id
-        );
-
-        if (result.changes === 0) {
-            return null; // not found
-        } else {
-            return await this.getById(id); // the updated article
-        }
-    }
-
-    async delete(id) {
-        await database().run(
-            "DELETE FROM users WHERE id = ?",
-            id
-        );
-    }
 }
 
 module.exports = new UserService();

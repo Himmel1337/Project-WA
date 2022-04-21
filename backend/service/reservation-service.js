@@ -3,8 +3,9 @@ const {database} = require("../database/database");
 class ReservationService {
 
     async getAll(order = "id") {
-
-        let orderByColumn = order === "day" ? "day" : "id";
+        // Never use the user's order directly! It may contain SQL injection.
+        // Cannot use binding with "?" for ORDER BY, hence, must validate the order manually using a condition.
+        let orderByColumn = order === "title" ? "title" : "id";
 
         return await database().all(
             "SELECT * FROM reservations ORDER BY " + orderByColumn
@@ -20,22 +21,22 @@ class ReservationService {
 
     async create(reservation) {
         const result = await database().run(
-            "INSERT INTO reservations (day, time) VALUES (?, ?)",
-            reservation.day, reservation.time
+            "INSERT INTO reservations (title, text) VALUES (?, ?)",
+            reservation.title, reservation.text
         );
         return await this.getById(result.lastID);
     }
 
     async update(id, reservation) {
         const result = await database().run(
-            "UPDATE reservations SET day = ?, time = ? WHERE id = ?",
-            reservation.day, reservation.time, id
+            "UPDATE reservations SET title = ?, text = ? WHERE id = ?",
+            reservation.title, reservation.text, id
         );
 
         if (result.changes === 0) {
-            return null;
+            return null; // not found
         } else {
-            return await this.getById(id);
+            return await this.getById(id); // the updated reservation
         }
     }
 

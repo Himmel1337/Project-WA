@@ -1,4 +1,5 @@
 module.exports = {
+    allowedFrontendOrigin: 'http://localhost:3001',
     jwtConfig: {
         secret: 'viv99vfd9vdf09',
         algorithms: ['HS256']
