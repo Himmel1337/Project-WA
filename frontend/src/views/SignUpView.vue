@@ -28,6 +28,6 @@ export default {
     async createUser() {
       await axios.post(config.backendUrl + '/user', data);
     },
+},}
 
-}
 </script>

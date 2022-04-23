@@ -4,17 +4,15 @@
   <br><br>
   Time: <input type="time"/>
   <br><br>
-  <div class="error" v-if="error">
-    {{ error }}
-    <button @click="error = null">Hide</button>
-  </div>
-  <div v-if="isLoading">Loading reservations...</div>
+  <error v-if="reservationStore.error" :text="reservationStore.error" @hide="reservationStore.clearError()"></error>
+  <div v-if="reservationStore.isLoading">Loading reservations...</div>
+  <div v-else-if="reservationStore.reservations.length === 0">No reservations.</div>
   <ul v-else>
-    <li v-for="reservation in reservations">
+    <li v-for="reservation in reservationStore.reservations">
       <router-link :to="{name: 'reservation-detail', params: {id: reservation.id}}">
         {{ reservation.title }}
-        <button @click.prevent="deleteReservation(reservation.id)">
-          {{isDeleting === reservation.id ? 'Deleting...' : 'Delete' }}
+        <button @click.prevent="reservationStore.delete(reservation.id)">
+          {{reservationStore.isDeleting === reservation.id ? 'Deleting...' : 'Delete' }}
         </button>
       </router-link>
     </li>
@@ -22,69 +20,35 @@
 </template>
 
 <script>
-import config from "../config";
-import axios from "axios";
+import {useReservationStore} from "../stores/ReservationStore";
+import {mapStores} from "pinia/dist/pinia";
+import Error from "../components/Error.vue"
 
 export default {
   name: "Reservations",
 
+  components: {
+    Error,
+  },
+
   data() {
     return {
-      reservations: [],
-      isLoading: true,
-      isDeleting: null,
-      error: null,
     }
   },
 
   created() {
-    this.loadData();
+    this.reservationStore.loadAll()
+  },
+
+  computed: {
+    ...mapStores(useReservationStore)
   },
 
   methods: {
-    async loadData() {
-      this.isLoading = true;
-
-      try {
-        const response = await axios.get(config.backendUrl + '/reservations');
-        this.reservations = response.data;
-        this.error = null;
-      } catch {
-        this.error = 'Cannot download reservations!';
-      }
-
-      this.isLoading = false;
-    },
-
-    async createReservation() {
-      await axios.post(config.backendUrl + '/reservations', data);
-    },
-
-    async deleteReservation(id) {
-      this.isDeleting = id;
-
-      try {
-        // delete on server
-        await axios.delete(`${config.backendUrl}/reservations/${id}`);
-        // delete locally
-        const index = this.reservations.findIndex(a => a.id === id);
-        this.reservations.splice(index, 1);
-
-        this.error = null;
-      } catch {
-        this.error = 'Cannot delete reservation!';
-      }
-
-      this.isDeleting = false;
-    }
   }
 }
 </script>
 
-<style>
-.error {
-  background: red;
-  color: white;
-  padding: 2em;
-}
+<style scoped>
+
 </style>
