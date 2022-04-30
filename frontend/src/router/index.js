@@ -3,7 +3,9 @@ import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import ReservationsView from '../views/ReservationsView.vue'
 import ReservationDetailView from '../views/ReservationDetailView.vue'
-import SignUpView from '../views/SignUpView.vue'
+import AuthSection from "../AuthSection.vue";
+import LoginView from "../views/LoginView.vue";
+import {useUserStore} from "../stores/UserStore";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -29,11 +31,40 @@ const router = createRouter({
       component: AboutView
     },
     {
-      path: '/signup',
-      name: 'signup',
-      component: SignUpView
+      path: '/login',
+      name: 'login',
+      component: LoginView
     },
+    {
+      path: '/auth',
+      name: 'auth',
+      component: AuthSection,
+      beforeEnter: checkAuthentication,
+      children: [
+        {
+          path: 'reservations',
+          name: 'reservations',
+          component: ReservationsView
+        },
+        {
+          path: 'reservations/:id',
+          name: 'reservation-detail',
+          component: ReservationDetailView
+        },
+      ]
+    }
   ]
 })
+
+function checkAuthentication(to, from, next) {
+  const store = useUserStore();
+  if (store.isAuthenticated) {
+    next();
+  } else {
+    store.setLoginMessage("Please, log in to access the private section of the web.")
+    store.setAfterLoginRoute(to)
+    next({name: 'login'})
+  }
+}
 
 export default router

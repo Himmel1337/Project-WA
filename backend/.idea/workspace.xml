@@ -5,17 +5,122 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cffee7f5-4a5b-4b1c-a697-3662f6b1406b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../frontend/src/components/Error.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/src/stores/ReservationStore.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/database.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/database/database.sqlite" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/src/AuthSection.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/src/stores/UserStore.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/src/views/LoginView.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/node_modules/.vite/_metadata.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/.vite/_metadata.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/.vite/pinia.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/.vite/pinia.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/.vite/pinia.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/.vite/pinia.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/stores/counter.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/views/ReservationDetailView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/views/ReservationDetailView.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/views/ReservationsView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/views/ReservationsView.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/views/SignUpView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/views/SignUpView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/@babel/parser/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/@babel/parser/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/@vitejs/plugin-vue/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/@vitejs/plugin-vue/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/@vue/compiler-core/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/@vue/compiler-core/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/@vue/compiler-dom/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/@vue/compiler-dom/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/@vue/compiler-sfc/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/@vue/compiler-sfc/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/@vue/compiler-ssr/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/@vue/compiler-ssr/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/@vue/devtools-api/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/@vue/devtools-api/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/@vue/reactivity-transform/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/@vue/reactivity-transform/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/@vue/reactivity/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/@vue/reactivity/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/@vue/runtime-core/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/@vue/runtime-core/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/@vue/runtime-dom/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/@vue/runtime-dom/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/@vue/server-renderer/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/@vue/server-renderer/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/@vue/shared/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/@vue/shared/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/axios/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/axios/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/csstype/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/csstype/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-android-64/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-android-64/bin/esbuild" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-android-64/esbuild.wasm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-android-64/exit0.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-android-64/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-android-64/wasm_exec.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-android-arm64/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-android-arm64/bin/esbuild" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-android-arm64/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-darwin-64/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-darwin-64/bin/esbuild" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-darwin-64/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-darwin-arm64/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-darwin-arm64/bin/esbuild" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-darwin-arm64/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-freebsd-64/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-freebsd-64/bin/esbuild" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-freebsd-64/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-freebsd-arm64/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-freebsd-arm64/bin/esbuild" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-freebsd-arm64/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-linux-32/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-linux-32/bin/esbuild" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-linux-32/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-linux-64/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/esbuild-linux-64/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-linux-arm/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-linux-arm/bin/esbuild" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-linux-arm/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-linux-arm64/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-linux-arm64/bin/esbuild" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-linux-arm64/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-linux-mips64le/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-linux-mips64le/bin/esbuild" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-linux-mips64le/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-linux-ppc64le/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-linux-ppc64le/bin/esbuild" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-linux-ppc64le/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-linux-riscv64/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-linux-riscv64/bin/esbuild" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-linux-riscv64/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-linux-s390x/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-linux-s390x/bin/esbuild" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-linux-s390x/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-netbsd-64/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-netbsd-64/bin/esbuild" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-netbsd-64/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-openbsd-64/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-openbsd-64/bin/esbuild" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-openbsd-64/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-sunos-64/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-sunos-64/bin/esbuild" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-sunos-64/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-windows-32/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-windows-32/bin/esbuild" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-windows-32/esbuild.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-windows-32/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-windows-64/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-windows-64/bin/esbuild" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-windows-64/esbuild.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-windows-64/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-windows-arm64/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-windows-arm64/bin/esbuild" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-windows-arm64/esbuild.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild-windows-arm64/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/esbuild/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/esbuild/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/estree-walker/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/estree-walker/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/follow-redirects/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/follow-redirects/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/fsevents/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/fsevents/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/fsevents/fsevents.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/fsevents/fsevents.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/fsevents/fsevents.node" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/fsevents/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/function-bind/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/function-bind/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/has/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/has/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/is-core-module/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/is-core-module/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/magic-string/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/magic-string/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/nanoid/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/nanoid/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/path-parse/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/path-parse/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/picocolors/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/picocolors/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/pinia/node_modules/vue-demi/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/pinia/node_modules/vue-demi/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/pinia/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/pinia/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/postcss/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/postcss/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/resolve/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/resolve/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/rollup/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/rollup/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/source-map-js/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/source-map-js/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/source-map/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/source-map/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/sourcemap-codec/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/sourcemap-codec/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/supports-preserve-symlinks-flag/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/supports-preserve-symlinks-flag/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/vite/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/vite/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/vue-router/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/vue-router/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/vue/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/vue/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/views/SignUpView.vue" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +176,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/home/xkudla/Documents/Mendel/WA/Project/backend",
+    "last_opened_file_path": "/home/xkudla/Documents/Mendel/WA/Project/frontend",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -149,6 +254,7 @@
       <workItem from="1650534329599" duration="1058000" />
       <workItem from="1650710052253" duration="115000" />
       <workItem from="1650711141197" duration="563000" />
+      <workItem from="1651310784030" duration="1357000" />
     </task>
     <servers />
   </component>
