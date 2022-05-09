@@ -16,16 +16,6 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/reservations',
-      name: 'reservations',
-      component: ReservationsView
-    },
-    {
-      path: '/reservations/:id',
-      name: 'reservation-detail',
-      component: ReservationDetailView
-    },
-    {
       path: '/about',
       name: 'about',
       component: AboutView

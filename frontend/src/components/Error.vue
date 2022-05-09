@@ -1,8 +1,13 @@
 <template>
-  <div class="error">
+  <v-alert
+      type="error"
+      icon="mdi-alert-circle"
+      closable
+      @close="onHideClick"
+      class="mb-5"
+  >
     {{ text }}
-    <button @click="onHideClick">Hide</button>
-  </div>
+  </v-alert>
 </template>
 
 <script>
@@ -25,10 +30,4 @@ export default {
 </script>
 
 <style>
-.error {
-  background: red;
-  color: white;
-  padding: 2em;
-  margin-bottom: 1em;
-}
 </style>

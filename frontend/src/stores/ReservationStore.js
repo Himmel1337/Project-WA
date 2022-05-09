@@ -42,15 +42,19 @@ export const useReservationStore = defineStore('reservation', {
     },
 
     async create() {
+      // ... try, start loading
       await axios.post(config.backendUrl + '/reservations', data);
+      // ... push to this.reservations, stop loading, catch error
     },
 
     async delete(id) {
       try {
         this.isDeleting = id;
 
+        // delete on server
         await axios.delete(`${config.backendUrl}/reservations/${id}`);
 
+        // delete locally
         const index = this.reservations.findIndex(a => a.id === id);
         this.reservations.splice(index, 1);
 
@@ -62,6 +66,13 @@ export const useReservationStore = defineStore('reservation', {
       }
     },
 
+    /**
+     * If no reservation with given ID exists, pushes it as a new item to the array.
+     * Otherwise, the old reservation with given ID is replaced by the new one.
+     * This method updates only the local state, no request is made to the server.
+     * @param id Number
+     * @param reservation Object
+     */
     addOrUpdateInStore(id, reservation) {
       const index = this.reservations.findIndex(a => a.id === id);
       if (index !== -1) {

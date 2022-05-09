@@ -1,6 +1,6 @@
 const {database} = require("../database/database");
 
-class ReservationService {
+class reservationService {
 
     async getAll(order = "id") {
         // Never use the user's order directly! It may contain SQL injection.
@@ -48,4 +48,4 @@ class ReservationService {
     }
 }
 
-module.exports = new ReservationService();
+module.exports = new reservationService();

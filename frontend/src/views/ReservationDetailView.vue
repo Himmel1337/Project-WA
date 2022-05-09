@@ -5,8 +5,6 @@
   <div v-else>
     <h1>Reservation {{ reservation.title }}</h1>
     <p>{{ reservation.text }}</p>
-    <p>{{ reservation.date }}</p>
-    <p>{{ reservation.time }}</p>
   </div>
 </template>
 
@@ -16,7 +14,7 @@ import {useReservationStore} from "../stores/ReservationStore";
 import Error from "../components/Error.vue"
 
 export default {
-  name: "ReservationDetail",
+  name: "reservationDetail",
 
   components: {
     Error,
