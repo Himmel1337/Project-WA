@@ -1,6 +1,6 @@
-### All articles
+### All reservations
 
-GET http://localhost:3000/articles?order=title
+GET http://localhost:3000/reservations?order=title
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InhwaXNhcm92Iiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjQ2ODExMzU2fQ.VYGzeYuPipA_qm5uNdHvGqORMLUFzolhHMUJDINl-tg
 
 <> 2022-02-21T150421.200.json
@@ -19,9 +19,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Inhwa
 <> 2022-02-21T144037.200.json
 <> 2022-02-21T104921.200.json
 
-### Fetch Existing article
+### Fetch Existing reservation
 
-GET http://localhost:3000/articles/1
+GET http://localhost:3000/reservations/1
 Accept: application/json
 
 <> 2022-02-21T143810.200.json
@@ -32,18 +32,18 @@ Accept: application/json
 <> 2022-02-21T105147.404.html
 
 
-### Fetch Nonexisting article
+### Fetch Nonexisting reservation
 
-GET http://localhost:3000/articles/33
+GET http://localhost:3000/reservations/33
 
 <> 2022-02-21T143807.404.html
 <> 2022-02-21T105352.404.html
 <> 2022-02-21T105126.404.html
 <> 2022-02-21T105023.400.html
 
-### Create New Article
+### Create New reservation
 
-POST http://localhost:3000/articles
+POST http://localhost:3000/reservations
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InhwaXNhcm92IiwiaWF0IjoxNjQ2NjQ4NTAwfQ.glFwNCz-COBG-B8AiiNAQmjZfwx0haPoz7lxABVQJik
 
@@ -65,9 +65,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Inhwa
 <> 2022-02-21T144507.500.html
 <> 2022-02-21T144436.500.html
 
-### Update existing article
+### Update existing reservation
 
-PUT http://localhost:3000/articles/2
+PUT http://localhost:3000/reservations/2
 Content-Type: application/json
 
 {
@@ -77,9 +77,9 @@ Content-Type: application/json
 
 <> 2022-02-21T150556.202.json
 
-### Update nonexisting article
+### Update nonexisting reservation
 
-PUT http://localhost:3000/articles/33
+PUT http://localhost:3000/reservations/33
 Content-Type: application/json
 
 {
@@ -93,14 +93,14 @@ Content-Type: application/json
 <> 2022-02-21T150418.202.json
 <> 2022-02-21T150403.202.json
 
-### Delete Existing article
+### Delete Existing reservation
 
-DELETE http://localhost:3000/articles/3
+DELETE http://localhost:3000/reservations/3
 Accept: application/json
 
-### Delete Nonexisting article
+### Delete Nonexisting reservation
 
-DELETE http://localhost:3000/articles/133
+DELETE http://localhost:3000/reservations/133
 Accept: application/json
 
 <> 2022-02-21T144029.404.html
