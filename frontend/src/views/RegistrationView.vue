@@ -6,16 +6,19 @@
   <div v-else>
     <v-form v-model="formValid" lazy-validation ref="form">
       <v-text-field
+          v-model="username"
           label="Username"
           :rules="usernameRules"
       ></v-text-field>
       <v-text-field
+          v-model="password"
           label="Password"
       ></v-text-field>
       <v-text-field
+          v-model="role"
           label="Role"
       ></v-text-field>
-      <v-btn @click="register()" color="primary">Register</v-btn>
+      <v-btn @click="addUser()" color="primary">Registration</v-btn>
     </v-form>
   </div>
 </template>
@@ -34,6 +37,9 @@ export default {
 
   data() {
     return {
+      username: '',
+      password: '',
+      role: '',
       formValid: true,
       usernameRules: [
         v => !!v || 'Username is required',
@@ -47,16 +53,11 @@ export default {
   },
 
   methods: {
-    async login() {
+    async addUser(username, password, role) {
       await this.$refs.form.validate();
       if (!this.formValid) return;
+      await this.userStore.addUser(this.username, this.password, this.role);
 
-      await this.userStore.login('xpisarov', 'heslo')
-
-      if (!this.userStore.error) {
-        this.$router.push(this.userStore.afterLoginRoute ?? {name: 'reservations'})
-        this.userStore.setAfterLoginRoute(null)
-      }
     },
   }
 }

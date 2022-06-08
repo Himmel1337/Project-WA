@@ -3,7 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import ReservationsView from '../views/ReservationsView.vue'
 import ReservationDetailView from '../views/ReservationDetailView.vue'
-import RegisterView from '../views/RegisterView.vue'
+import RegisterView from '../views/RegistrationView.vue'
 import AuthSection from "../AuthSection.vue";
 import LoginView from "../views/LoginView.vue";
 import AddReservationView from "../views/AddReservationView.vue";

@@ -46,23 +46,16 @@ export const useUserStore = defineStore('user', {
       }
     },
 
-    async register(username, password) {
+    async addUser(username, password, role) {
       try {
-        this.isLoggingIn = true;
-
-        const data = {username, password};
-        const response = await axios.post(config.backendUrl + '/user/login', data);
-
-        this.token = response.data.token;
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.token;
-        localStorage.setItem('token', this.token);
-
+        this.isLoading = true;
+        const data = {username, password, role};
+        await axios.post(config.backendUrl + '/user', data);
         this.error = null;
-        this.loginMessage = null;
-        this.isLoggingIn = false;
+        this.isLoading = false;
 
       } catch {
-        this.error = 'Cannot log in!';
+        this.error = 'Cannot create user!';
       }
     },
 

@@ -1,16 +1,16 @@
 const express = require("express");
 const router = express.Router();
-const reservationServiceService = require('../service/reservation-service')
+const reservationService = require('../service/reservation-service')
 
 router.get('/', async (req, res) => {
     const order = req.query.order;
-    const reservations = await reservationServiceService.getAll(order);
+    const reservations = await reservationService.getAll(order);
     res.json(reservations);
 })
 
 router.get('/:id', async (req, res) => {
     const id = parseInt(req.params.id);
-    const reservation = await reservationServiceService.getById(id);
+    const reservation = await reservationService.getById(id);
 
     if (reservation) {
         res.json(reservation);
@@ -31,7 +31,7 @@ router.post('/', async (req, res) => {
         return;
     }
 
-    const reservation = await reservationServiceService.create(data);
+    const reservation = await reservationService.create(data);
 
     res.status(201).json(reservation);
 })
@@ -49,7 +49,7 @@ router.put('/:id', async (req, res) => {
         return;
     }
 
-    const reservation = await reservationServiceService.update(id, data);
+    const reservation = await reservationService.update(id, data);
 
     if (!reservation) {
         res.status(404).send("Not found")
@@ -61,7 +61,7 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
     const id = parseInt(req.params.id);
-    await reservationServiceService.delete(id);
+    await reservationService.delete(id);
     res.status(204).send("No Content");
 })
 
