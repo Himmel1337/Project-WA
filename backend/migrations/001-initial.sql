@@ -1,6 +1,0 @@
-CREATE TABLE IF NOT EXISTS reservations
-(
-    id    INTEGER PRIMARY KEY AUTOINCREMENT,
-    title TEXT,
-    text  TEXT
-)
