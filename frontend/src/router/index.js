@@ -3,10 +3,13 @@ import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import ReservationsView from '../views/ReservationsView.vue'
 import ReservationDetailView from '../views/ReservationDetailView.vue'
+import AddReservationView from "../views/AddFlightView.vue";
+import FlightsView from '../views/FlightsView.vue'
+import FlightDetailView from '../views/FlightDetailView.vue'
+import AddFlightView from "../views/AddFlightView.vue";
 import RegisterView from '../views/RegistrationView.vue'
 import AuthSection from "../AuthSection.vue";
 import LoginView from "../views/LoginView.vue";
-import AddReservationView from "../views/AddReservationView.vue";
 import {useUserStore} from "../stores/UserStore";
 
 const router = createRouter({
@@ -32,11 +35,7 @@ const router = createRouter({
       name: 'register',
       component: RegisterView
     },
-    {
-      path: '/addReservation',
-      name: 'addReservation',
-      component: AddReservationView
-    },
+
     {
       path: '/auth',
       name: 'auth',
@@ -52,6 +51,26 @@ const router = createRouter({
           path: 'reservations/:id',
           name: 'reservation-detail',
           component: ReservationDetailView
+        },
+        {
+          path: '/addReservation',
+          name: 'addReservation',
+          component: AddReservationView
+        },
+        {
+          path: 'flights',
+          name: 'flights',
+          component: FlightsView
+        },
+        {
+          path: 'flights/:id',
+          name: 'flight-detail',
+          component: FlightDetailView
+        },
+        {
+          path: '/addFlight',
+          name: 'addFlight',
+          component: AddFlightView
         },
       ]
     }

@@ -6,6 +6,7 @@ const {jwtConfig} = require("./config");
 const homepageRouter = require('./routes/homepage')
 const reservationsRouter = require('./routes/reservations')
 const userRouter = require('./routes/user')
+const fligtsRouter = require('./routes/flights')
 const cors = require("cors");
 const config = require("./config");
 
@@ -22,6 +23,7 @@ app.use('/user/info', jwt(jwtConfig));
 app.use('/', homepageRouter);
 app.use('/reservations', reservationsRouter);
 app.use('/user', userRouter);
+app.use('/flights', fligtsRouter);
 
 // start the app on the given port
 const port = 3000

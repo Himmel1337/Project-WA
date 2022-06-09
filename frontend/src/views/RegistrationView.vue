@@ -14,10 +14,15 @@
           v-model="password"
           label="Password"
       ></v-text-field>
-      <v-text-field
+      <v-select
           v-model="role"
+          :items="items"
+          item-text="Role"
           label="Role"
-      ></v-text-field>
+          persistent-hint
+          return-object
+          single-line
+      ></v-select>
       <v-btn @click="addUser()" color="primary">Registration</v-btn>
     </v-form>
   </div>
@@ -45,6 +50,9 @@ export default {
         v => !!v || 'Username is required',
         v => (v && v.length >= 3) || 'Username must be at least 3 characters',
       ],
+      items: [
+          'client', 'secretary', 'technician'
+      ]
     }
   },
 
