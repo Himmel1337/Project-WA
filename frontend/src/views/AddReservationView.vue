@@ -1,7 +1,7 @@
 <template>
   <div v-if="reservationStore.isloading">create reservation ...</div>
   <div v-else>
-    <v-form v-model="formValid" lazy-validation ref="form">
+    <v-form v-model="form" lazy-validation ref="form">
       <v-text-field
           v-model="title"
           label="Title"

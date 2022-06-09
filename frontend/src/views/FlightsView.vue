@@ -20,8 +20,6 @@
             <v-card-header-text>
               <v-card-title>
                 {{ flight.title }}
-                <v-chip v-if="Math.random() > 0.5" color="green" class="ml-2">New</v-chip>
-                <v-chip v-if="Math.random() > 0.5" color="orange" class="ml-2">Top 5</v-chip>
               </v-card-title>
             </v-card-header-text>
           </v-card-header>

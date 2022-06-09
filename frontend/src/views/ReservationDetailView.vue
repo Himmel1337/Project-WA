@@ -5,6 +5,7 @@
   <div v-else>
     <h1>Reservation {{ reservation.title }}</h1>
     <p>{{ reservation.text }}</p>
+    <p>{{ reservation.flights_id }}</p>
   </div>
 </template>
 

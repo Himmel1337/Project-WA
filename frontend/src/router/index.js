@@ -3,7 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import ReservationsView from '../views/ReservationsView.vue'
 import ReservationDetailView from '../views/ReservationDetailView.vue'
-import AddReservationView from "../views/AddFlightView.vue";
+import AddReservationView from "../views/AddReservationView.vue";
 import FlightsView from '../views/FlightsView.vue'
 import FlightDetailView from '../views/FlightDetailView.vue'
 import AddFlightView from "../views/AddFlightView.vue";
@@ -53,7 +53,7 @@ const router = createRouter({
           component: ReservationDetailView
         },
         {
-          path: '/addReservation',
+          path: 'addReservation',
           name: 'addReservation',
           component: AddReservationView
         },
@@ -68,7 +68,7 @@ const router = createRouter({
           component: FlightDetailView
         },
         {
-          path: '/addFlight',
+          path: 'addFlight',
           name: 'addFlight',
           component: AddFlightView
         },

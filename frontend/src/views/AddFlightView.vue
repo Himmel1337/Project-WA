@@ -1,10 +1,14 @@
 <template>
+  <error v-if="flightStore.error" :text="flightStore.error" @hide="flightStore.clearError()"></error>
+  <v-alert type="warning" v-else-if="flightStore.loginMessage" class="mb-7">{{ flightStore.loginMessage }}</v-alert>
+
   <div v-if="flightStore.isloading">create flight ...</div>
   <div v-else>
-    <v-form v-model="formValid" lazy-validation ref="form">
+    <v-form v-model="form" lazy-validation ref="form">
       <v-text-field
           v-model="title"
           label="Title"
+          :rules="flightRules"
       ></v-text-field>
       <v-text-field
           v-model="text"
@@ -12,7 +16,8 @@
       ></v-text-field>
       <v-text-field
           v-model="time"
-          label="Time"
+          label="Time (Format: DD-MM-YYYY HH:MM)"
+          :rules="flightRules"
       ></v-text-field>
       <v-btn @click="addFlight()" color="primary">Create</v-btn>
     </v-form>
@@ -37,7 +42,10 @@ export default {
       formValid: true,
       title: '',
       text: '',
-      time: ''
+      time: '',
+      flightRules: [
+        v => !!v || 'Time is required',
+      ]
     }
   },
 
