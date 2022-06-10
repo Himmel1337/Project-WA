@@ -10,6 +10,15 @@
           v-model="text"
           label="Text"
       ></v-text-field>
+      <v-select
+          v-model="role"
+          :items="items"
+          item-text="Role"
+          label="Role"
+          persistent-hint
+          return-object
+          single-line
+      ></v-select>
       <v-btn @click="addReservation()" color="primary">Create</v-btn>
     </v-form>
   </div>
@@ -44,7 +53,7 @@ export default {
     async addReservation(title, text) {
       await this.$refs.form.validate();
       if (!this.formValid) return;
-      await this.reservationStore.addReservation(this.title, this.text);
+      await this.reservationStore.addReservation(this.title, this.text, this.fligts_id);
 
     },
   }
