@@ -24,8 +24,7 @@ router.post('/', async (req, res) => {
     console.log(req.reservation);
 
     if (
-        data.title === undefined || data.title.trim() === "" ||
-        data.flight_id === undefined || data.flight_id.trim() === ''
+        data.title === undefined || data.title.trim() === "" 
     ) {
         res.status(400).send("Bad input");
         return;

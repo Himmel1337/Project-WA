@@ -23,7 +23,7 @@
               </v-card-title>
             </v-card-header-text>
           </v-card-header>
-          
+
           <v-card-actions>
             <v-btn color="primary" :to="{name: 'reservation-detail', params: {id: reservation.id}}">Show</v-btn>
             <v-spacer/>

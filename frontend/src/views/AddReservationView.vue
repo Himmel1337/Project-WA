@@ -17,6 +17,14 @@
           return-object
           single-line
       ></v-select>
+      <v-combobox
+          v-model="users"
+          :items="usersNicknames"
+          label="Users"
+          multiple
+          outlined
+          dense
+      ></v-combobox>
       <v-btn @click="addReservation()" color="primary">Create</v-btn>
     </v-form>
   </div>
@@ -43,7 +51,9 @@ export default {
       formValid: true,
       title: '',
       flight_id: 0,
-      flightTitleArray: ['Mars', 'Neptun', 'Venus', 'Other']
+      flightTitleArray: ['Mars', 'Neptun', 'Venus', 'Other'],
+      usersNicknames: ['maks', 'tomas', 'ferd'],
+      users: []
     };
   },
 
@@ -57,10 +67,14 @@ export default {
 
   methods: {
 
-    async addReservation(title, flight_id) {
+    async addReservation(title, flight_id, users) {
       await this.$refs.form.validate();
       if (!this.formValid) return;
       await this.reservationStore.addReservation(this.title, this.flight_id);
+      const n = this.users.length;
+      for (let i = 0; i < n; i++){
+        await this.reservationStore.addUserReservation(1, i);
+      }
     },
   }
 };

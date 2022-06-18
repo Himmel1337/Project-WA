@@ -45,11 +45,11 @@ export const useReservationStore = defineStore('reservation', {
     async addReservation(title, flight_id) {
       try {
         this.isLoading = true;
-        if (flight_id === "Mars"){
+        if (flight_id === "Mars") {
           flight_id = 1;
-        } else if (flight_id === "Neptun"){
+        } else if (flight_id === "Neptun") {
           flight_id = 2;
-        } else if (flight_id === "Venus"){
+        } else if (flight_id === "Venus") {
           flight_id = 3;
         } else {
           flight_id = 4;
@@ -59,9 +59,25 @@ export const useReservationStore = defineStore('reservation', {
         this.reservations.push(reservation);
         this.error = null;
         this.isLoading = false;
+        this.isLoading = true;
 
       } catch {
         this.error = 'Cannot create reservation!';
+      }
+    },
+
+    async addUserReservation(reservation_id, user_id) {
+      try {
+        this.isLoading = true;
+        const data = {reservation_id, user_id};
+        await axios.post(config.backendUrl + '/reservation_user', data);
+        this.reservations.push(reservation_user);
+        this.error = null;
+        this.isLoading = false;
+        this.error = null;
+        this.isLoading = false;
+      } catch {
+        this.error = 'Cannot add User to Reservation';
       }
     },
 
@@ -82,14 +98,14 @@ export const useReservationStore = defineStore('reservation', {
       }
     },
 
-    addOrUpdateInStore(id, reservation) {
-      const index = this.reservations.findIndex(a => a.id === id);
-      if (index !== -1) {
-        this.reservations[index] = reservation;
-      } else {
-        this.reservations.push(reservation);
-      }
-    },
+    // addOrUpdateInStore(id, reservation) {
+    //   const index = this.reservations.findIndex(a => a.id === id);
+    //   if (index !== -1) {
+    //     this.reservations[index] = reservation;
+    //   } else {
+    //     this.reservations.push(reservation);
+    //   }
+    // },
 
     clearError() {
       this.error = null;
