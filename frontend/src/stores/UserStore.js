@@ -12,6 +12,7 @@ export const useUserStore = defineStore('user', {
     }
 
     return {
+      users: [],
       token: oldToken,
       error: null,
       isLoggingIn: false,
@@ -75,6 +76,31 @@ export const useUserStore = defineStore('user', {
 
     clearError() {
       this.error = null;
-    }
+    },
+
+    async loadAll() {
+      try {
+        this.isLoading = true;
+        const response = await axios.get(config.backendUrl + '/users');
+        this.users = response.data;
+        this.error = null;
+        this.isLoading = false;
+      } catch {
+        this.error = 'Cannot download users!';
+      }
+    },
+
+    async loadById(id) {
+      try {
+        this.isLoading = true;
+        const response = await axios.get(config.backendUrl + '/users/' + id);
+        this.addOrUpdateInStore(id, response.data);
+        this.error = null;
+        this.isLoading = false;
+
+      } catch {
+        this.error = 'Cannot download user!';
+      }
+    },
   }
 })

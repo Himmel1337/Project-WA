@@ -4,7 +4,7 @@ class Reservation_userService {
 
     async getAll(order = "id") {
 
-        let orderByColumn = order === "id" ? "id" : "id";
+        let orderByColumn = order === "reservation_id" ? "reservation_id" : "id";
 
         return await database().all(
             "SELECT * FROM reservation_user ORDER BY " + orderByColumn
@@ -17,6 +17,8 @@ class Reservation_userService {
             id
         );
     }
+
+    
 
     async create(reservation_user) {
         const result = await database().run(

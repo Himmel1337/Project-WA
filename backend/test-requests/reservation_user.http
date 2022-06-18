@@ -101,4 +101,9 @@ Accept: application/json
 
 <> 2022-02-21T144029.404.html
 
+### Fetch Nonexisting reservation_user
+GET http://localhost:3000/reservation_user/usernames/1
+Accept: application/json
+
+
 

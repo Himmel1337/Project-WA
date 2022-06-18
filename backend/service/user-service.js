@@ -5,6 +5,15 @@ const jwt = require("jsonwebtoken");
 
 class UserService {
 
+    async getAll(order = "id") {
+        
+
+        return await database().all(
+            "SELECT id, username, role FROM users "
+        );
+    }
+
+    
     async getByUser(username, password) {
         return await database().get(
             "SELECT * FROM users WHERE username = ?",
@@ -34,13 +43,6 @@ class UserService {
             passwordConfig.keylen,
             passwordConfig.digest
         ).toString(`hex`);
-    }
-
-    async getById(id) {
-        return await database().get(
-            "SELECT * FROM users WHERE id = ?",
-            id
-        );
     }
 
     async create(user) {

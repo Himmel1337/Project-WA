@@ -6,7 +6,7 @@ const {jwtConfig} = require("./config");
 const homepageRouter = require('./routes/homepage')
 const reservationsRouter = require('./routes/reservations')
 const reservation_userRouter = require('./routes/reservation_user')
-const userRouter = require('./routes/user')
+const userRouter = require('./routes/users')
 const fligtsRouter = require('./routes/flights')
 const cors = require("cors");
 const config = require("./config");
@@ -19,7 +19,7 @@ app.use('/user/info', jwt(jwtConfig));
 
 app.use('/', homepageRouter);
 app.use('/reservations', reservationsRouter);
-app.use('/user', userRouter);
+app.use('/users', userRouter);
 app.use('/flights', fligtsRouter);
 app.use('/reservation_user', reservation_userRouter)
 

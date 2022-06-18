@@ -22,3 +22,36 @@ Content-Type: application/json
 
 GET http://localhost:3000/user/info
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InhwaXNhcm92Iiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjQ3MDIyNTIxfQ.gK6wq8e2TVonarPL3YbyRwRFvUHWJ2wCkfmlTSqK1yE
+
+### All Users
+
+GET http://localhost:3000/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InhwaXNhcm92Iiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjQ2ODExMzU2fQ.VYGzeYuPipA_qm5uNdHvGqORMLUFzolhHMUJDINl-tg
+
+<> 2022-02-21T150421.200.json
+<> 2022-02-21T150411.200.json
+<> 2022-02-21T145911.200.json
+<> 2022-02-21T145708.200.json
+<> 2022-02-21T145641.200.json
+<> 2022-02-21T145521.200.json
+<> 2022-02-21T145515.200.json
+<> 2022-02-21T145457.200.json
+<> 2022-02-21T145443.200.json
+<> 2022-02-21T145434.200.json
+<> 2022-02-21T145402.200.json
+<> 2022-02-21T145351.200.json
+<> 2022-02-21T145150.200.json
+<> 2022-02-21T144037.200.json
+<> 2022-02-21T104921.200.json
+
+### Fetch Existing user
+
+GET http://localhost:3000/user/1
+Accept: application/json
+
+<> 2022-02-21T143810.200.json
+<> 2022-02-21T105334.200.json
+<> 2022-02-21T105316.404.html
+<> 2022-02-21T105230.404.html
+<> 2022-02-21T105214.404.html
+<> 2022-02-21T105147.404.html

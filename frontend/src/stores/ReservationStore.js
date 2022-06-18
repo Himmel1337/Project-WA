@@ -38,7 +38,7 @@ export const useReservationStore = defineStore('reservation', {
         this.isLoading = false;
 
       } catch {
-        this.error = 'Cannot download reservations!';
+        this.error = 'Cannot download reservation!';
       }
     },
 
@@ -98,14 +98,14 @@ export const useReservationStore = defineStore('reservation', {
       }
     },
 
-    // addOrUpdateInStore(id, reservation) {
-    //   const index = this.reservations.findIndex(a => a.id === id);
-    //   if (index !== -1) {
-    //     this.reservations[index] = reservation;
-    //   } else {
-    //     this.reservations.push(reservation);
-    //   }
-    // },
+    addOrUpdateInStore(id, reservation) {
+      const index = this.reservations.findIndex(a => a.id === id);
+      if (index !== -1) {
+        this.reservations[index] = reservation;
+      } else {
+        this.reservations.push(reservation);
+      }
+    },
 
     clearError() {
       this.error = null;

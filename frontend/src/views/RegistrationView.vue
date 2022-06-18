@@ -14,15 +14,15 @@
           v-model="password"
           label="Password"
       ></v-text-field>
-      <v-select
-          v-model="role"
-          :items="items"
-          item-text="Role"
-          label="Role"
-          persistent-hint
-          return-object
-          single-line
-      ></v-select>
+<!--      <v-select-->
+<!--          v-model="role"-->
+<!--          :items="items"-->
+<!--          item-text="Role"-->
+<!--          label="Role"-->
+<!--          persistent-hint-->
+<!--          return-object-->
+<!--          single-line-->
+<!--      ></v-select>-->
       <v-btn @click="addUser()" color="primary">Registration</v-btn>
     </v-form>
   </div>
@@ -62,6 +62,9 @@ export default {
 
   methods: {
     async addUser(username, password, role) {
+      if (this.role === ''){
+        this.role = 'client';
+      }
       await this.$refs.form.validate();
       if (!this.formValid) return;
       await this.userStore.addUser(this.username, this.password, this.role);

@@ -40,14 +40,14 @@ router.put('/:id', async (req, res) => {
     const data = req.body;
     const id = parseInt(req.params.id);
 
-    if (
-        isNaN(id) ||
-        data.reservation_id === undefined || data.reservation_id.trim() === "" ||
-        data.user_id === undefined || data.user_id.trim() === ''
-    ) {
-        res.status(400).send("Bad input");
-        return;
-    }
+    // if (
+    //     isNaN(id) ||
+    //     data.reservation_id === undefined || data.reservation_id.trim() === "" ||
+    //     data.user_id === undefined || data.user_id.trim() === ''
+    // ) {
+    //     res.status(400).send("Bad input");
+    //     return;
+    // }
 
     const reservation_user = await reservation_userService.update(id, data);
 
