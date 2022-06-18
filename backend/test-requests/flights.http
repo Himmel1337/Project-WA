@@ -1,6 +1,6 @@
 ### All flights
 
-GET http://localhost:3000/flights?order=title
+GET http://localhost:3000/flights?order=name
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InhwaXNhcm92Iiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjQ2ODExMzU2fQ.VYGzeYuPipA_qm5uNdHvGqORMLUFzolhHMUJDINl-tg
 
 <> 2022-02-21T150421.200.json
@@ -48,9 +48,9 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InhwaXNhcm92IiwiaWF0IjoxNjQ2NjQ4NTAwfQ.glFwNCz-COBG-B8AiiNAQmjZfwx0haPoz7lxABVQJik
 
 {
-  "title": "abc",
-  "text": "ahoj",
-  "time": "2022-12-21 21:00:00"
+  "name": "Earth",
+  "date": "2022-12-21",
+  "time": "21:00"
 }
 
 <> 2022-02-21T145145.201.json
@@ -68,13 +68,13 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Inhwa
 
 ### Update existing flight
 
-PUT http://localhost:3000/flights/2
+PUT http://localhost:3000/flights/1
 Content-Type: application/json
 
 {
-  "title": "Modified title",
-  "text": "Modified text",
-  "time": "2022-12-21 21:00:00"
+  "name": "Earth",
+  "date": "2022-12-21",
+  "time": "21:00"
 }
 
 <> 2022-02-21T150556.202.json
@@ -85,8 +85,7 @@ PUT http://localhost:3000/flights/33
 Content-Type: application/json
 
 {
-  "title": "Modified title",
-  "text": "Modified text",
+  "name": "Earth",
   "time": "2022-12-21 21:00:00"
 }
 

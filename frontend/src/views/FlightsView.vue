@@ -19,13 +19,13 @@
           <v-card-header>
             <v-card-header-text>
               <v-card-title>
-                {{ flight.title }}
+                {{ flight.name }}
               </v-card-title>
             </v-card-header-text>
           </v-card-header>
 
           <v-card-text>
-            {{ flight.text.length > 30 ? flight.text.substr(0, 30) + '...' : flight.text }}
+            {{ flight.time.length > 30 ? flight.time.substr(0, 30) + '...' : flight.time }}
           </v-card-text>
 
           <v-card-actions>
@@ -44,7 +44,6 @@
 import {useFlightStore} from "../stores/FlightStore";
 import {mapStores} from "pinia/dist/pinia";
 import Error from "../components/Error.vue"
-import {useUserStore} from "../stores/UserStore";
 
 export default {
   name: "Flights",
@@ -63,7 +62,7 @@ export default {
   },
 
   computed: {
-    ...mapStores(useFlightStore, useUserStore)
+    ...mapStores(useFlightStore)
   },
 
   methods: {

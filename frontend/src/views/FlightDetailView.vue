@@ -3,9 +3,16 @@
 
   <div v-if="flightStore.isLoading">Loading...</div>
   <div v-else>
-    <h1>Flight {{ flight.title }}</h1>
-    <p>{{ flight.text }}</p>
-    <p>{{ flight.time }}</p>
+    <h1>Flight</h1>
+    <v-text-field
+        v-model="flight.name"
+        label="Name"
+    ></v-text-field>
+    <v-text-field
+        v-model="flight.time"
+        type="date"
+        label="Time"
+    ></v-text-field>
   </div>
 </template>
 

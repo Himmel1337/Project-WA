@@ -24,9 +24,9 @@ router.post('/', async (req, res) => {
     console.log(req.flight);
 
     if (
-        data.title === undefined || data.title.trim() === "" ||
-        data.text === undefined || data.text.trim() === "" ||
-        data.time === undefined || data.time.trim() === ""
+        data.name === undefined || data.name.trim() === "" ||
+        data.date === undefined || data.date.trim() === "" ||
+        data.time === undefined || data.time.trim() === "" 
     ) {
         res.status(400).send("Bad input");
         return;
@@ -43,8 +43,8 @@ router.put('/:id', async (req, res) => {
 
     if (
         isNaN(id) ||
-        data.title === undefined || data.title.trim() === "" ||
-        data.text === undefined || data.text.trim() === "" ||
+        data.name === undefined || data.name.trim() === "" ||
+        data.date === undefined || data.date.trim() === "" ||
         data.time === undefined || data.time.trim() === ""
     ) {
         res.status(400).send("Bad input");

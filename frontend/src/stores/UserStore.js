@@ -32,7 +32,7 @@ export const useUserStore = defineStore('user', {
         this.isLoggingIn = true;
 
         const data = {username, password};
-        const response = await axios.post(config.backendUrl + '/user/login', data);
+        const response = await axios.post(config.backendUrl + '/users/login', data);
 
         this.token = response.data.token;
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.token;

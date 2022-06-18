@@ -13,6 +13,9 @@
       <v-text-field
           v-model="password"
           label="Password"
+          :type="show1 ? 'text' : 'password'"
+          :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+          @click:append="show1 = !show1"
       ></v-text-field>
 <!--      <v-select-->
 <!--          v-model="role"-->
@@ -42,6 +45,8 @@ export default {
 
   data() {
     return {
+      show1: false,
+      show2: true,
       username: '',
       password: '',
       role: '',

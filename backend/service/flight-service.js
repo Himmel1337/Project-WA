@@ -4,7 +4,7 @@ class FlightService {
 
     async getAll(order = "id") {
 
-        let orderByColumn = order === "title" ? "title" : "id";
+        let orderByColumn = order === "name" ? "name" : "id";
 
         return await database().all(
             "SELECT * FROM flights ORDER BY " + orderByColumn
@@ -20,16 +20,16 @@ class FlightService {
 
     async create(flight) {
         const result = await database().run(
-            "INSERT INTO flights (title, text, time) VALUES (?, ?, ?)",
-            flight.title, flight.text, flight.time
+            "INSERT INTO flights (name, date, time) VALUES (?, ?, ?)",
+            flight.name, flight.date, flight.time
         );
         return await this.getById(result.lastID);
     }
 
     async update(id, flight) {
         const result = await database().run(
-            "UPDATE flights SET title = ?, text = ?, time = ? WHERE id = ?",
-            flight.title, flight.text, flight.time, id
+            "UPDATE flights SET name = ?, data = ?, time = ? WHERE id = ?",
+            flight.name, flight.date, flight.time, id
         );
 
         if (result.changes === 0) {

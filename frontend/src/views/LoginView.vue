@@ -12,7 +12,10 @@
         ></v-text-field>
       <v-text-field
           v-model="password"
-        label="Password"
+          label="Password"
+          :type="show1 ? 'text' : 'password'"
+          :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+          @click:append="show1 = !show1"
       ></v-text-field>
       <v-btn @click="login()" color="primary">Log me in</v-btn>
     </v-form>
@@ -33,6 +36,8 @@ export default {
 
   data() {
     return {
+      show1: false,
+      show2: true,
       username: '',
       password: '',
       formValid: true,

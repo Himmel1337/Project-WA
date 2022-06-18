@@ -6,18 +6,19 @@
   <div v-else>
     <v-form v-model="form" lazy-validation ref="form">
       <v-text-field
-          v-model="title"
-          label="Title"
+          v-model="name"
+          label="Name"
           :rules="flightRules"
       ></v-text-field>
       <v-text-field
-          v-model="text"
-          label="Text"
+          v-model="date"
+          label="Date"
+          type="date"
       ></v-text-field>
       <v-text-field
           v-model="time"
-          label="Time (Format: DD-MM-YYYY HH:MM)"
-          :rules="flightRules"
+          label="Time"
+          type="time"
       ></v-text-field>
       <v-btn @click="addFlight()" color="primary">Create</v-btn>
     </v-form>
@@ -31,7 +32,7 @@ import {useFlightStore} from "../stores/FlightStore";
 import Error from "../components/Error.vue";
 
 export default {
-  name: "Create",
+  name: "AddFlight",
 
   components: {
     Error,
@@ -40,8 +41,8 @@ export default {
   data() {
     return {
       formValid: true,
-      title: '',
-      text: '',
+      name: '',
+      date: '',
       time: '',
       flightRules: [
         v => !!v || 'Time is required',
@@ -54,10 +55,10 @@ export default {
   },
 
   methods: {
-    async addFlight(title, text, time) {
+    async addFlight(name, date, time) {
       await this.$refs.form.validate();
       if (!this.formValid) return;
-      await this.flightStore.addFlight(this.title, this.text, this.time);
+      await this.flightStore.addFlight(this.name, this.date, this.time);
 
     },
   }

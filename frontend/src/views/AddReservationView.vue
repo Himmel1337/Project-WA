@@ -10,8 +10,9 @@
           label="Title"
       ></v-text-field>
       <v-select
-          v-model="flight_id"
-          :items="flightTitleArray"
+          v-model="flight"
+          :items="flightStore.flights"
+          @input="selectFlightId($event)"
           label="Flight"
           persistent-hint
           return-object
@@ -19,11 +20,10 @@
       ></v-select>
       <v-combobox
           v-model="users"
-          :items="usersNicknames"
+          :items="userStore.users"
+          item-text="username"
           label="Users"
           multiple
-          outlined
-          dense
       ></v-combobox>
       <v-btn @click="addReservation()" color="primary">Create</v-btn>
     </v-form>
@@ -38,9 +38,10 @@ import {mapStores} from "pinia/dist/pinia";
 import {useReservationStore} from "../stores/ReservationStore";
 import Error from "../components/Error.vue";
 import {useFlightStore} from "../stores/FlightStore";
+import {useUserStore} from "../stores/UserStore";
 
 export default {
-  name: "Create",
+  name: "AddReservation",
 
   components: {
     Error,
@@ -49,28 +50,32 @@ export default {
   data() {
     return {
       formValid: true,
-      title: '',
-      flight_id: 0,
-      flightTitleArray: ['Mars', 'Neptun', 'Venus', 'Other'],
-      usersNicknames: ['maks', 'tomas', 'ferd'],
-      users: []
+      flight: {id: 0, title: 'Mars', text: 'Mars', time: '21-12-2055 23:00'},
+      selectFlightId: '',
+      flights: [{}],
+      users: [{id: 1, username: 'dd', role: 'ss'}],
     };
   },
 
   created() {
     this.flightStore.loadAll()
+    this.userStore.loadAll();
   },
 
   computed: {
-    ...mapStores(useReservationStore, useFlightStore),
+    ...mapStores(useReservationStore, useFlightStore, useUserStore),
   },
 
   methods: {
 
-    async addReservation(title, flight_id, users) {
+    selectFlightId (e) {
+      this.selectFlightId = e.id;
+    },
+
+    async addReservation(title, flight, users) {
       await this.$refs.form.validate();
       if (!this.formValid) return;
-      await this.reservationStore.addReservation(this.title, this.flight_id);
+      await this.reservationStore.addReservation(this.title, this.flight);
       const n = this.users.length;
       for (let i = 0; i < n; i++){
         await this.reservationStore.addUserReservation(1, i);
