@@ -60,4 +60,11 @@ router.get('/info', async (req, res) => {
     res.json(tokenPayload);
 })
 
+router.get('/', async (req, res) => {
+    const order = req.query.order;
+    const users = await userService.getAll(order);
+    res.json(users);
+})
+
+
 module.exports = router;
