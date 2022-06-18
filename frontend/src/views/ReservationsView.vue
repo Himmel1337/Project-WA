@@ -23,11 +23,7 @@
               </v-card-title>
             </v-card-header-text>
           </v-card-header>
-
-          <v-card-text>
-            {{ reservation.text.length > 30 ? reservation.text.substr(0, 30) + '...' : reservation.text }}
-          </v-card-text>
-
+          
           <v-card-actions>
             <v-btn color="primary" :to="{name: 'reservation-detail', params: {id: reservation.id}}">Show</v-btn>
             <v-spacer/>

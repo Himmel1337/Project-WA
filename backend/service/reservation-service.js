@@ -20,16 +20,16 @@ class ReservationService {
 
     async create(reservation) {
         const result = await database().run(
-            "INSERT INTO reservations (title, text) VALUES (?, ?)",
-            reservation.title, reservation.text
+            "INSERT INTO reservations (title, flight_id) VALUES (?, ?)",
+            reservation.title, reservation.flight_id
         );
         return await this.getById(result.lastID);
     }
 
     async update(id, reservation) {
         const result = await database().run(
-            "UPDATE reservations SET title = ?, text = ? WHERE id = ?",
-            reservation.title, reservation.text, id
+            "UPDATE reservations SET title = ? WHERE id = ?",
+            reservation.title, id
         );
 
         if (result.changes === 0) {

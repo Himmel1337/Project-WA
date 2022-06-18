@@ -42,10 +42,19 @@ export const useReservationStore = defineStore('reservation', {
       }
     },
 
-    async addReservation(title, text) {
+    async addReservation(title, flight_id) {
       try {
         this.isLoading = true;
-        const data = {title, text};
+        if (flight_id === "Mars"){
+          flight_id = 1;
+        } else if (flight_id === "Neptun"){
+          flight_id = 2;
+        } else if (flight_id === "Venus"){
+          flight_id = 3;
+        } else {
+          flight_id = 4;
+        }
+        const data = {title, flight_id};
         await axios.post(config.backendUrl + '/reservations', data);
         this.reservations.push(reservation);
         this.error = null;

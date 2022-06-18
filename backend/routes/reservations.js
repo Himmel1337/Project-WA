@@ -21,11 +21,11 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
     const data = req.body;
-    console.log(req.user);
+    console.log(req.reservation);
 
     if (
         data.title === undefined || data.title.trim() === "" ||
-        data.text === undefined || data.text.trim() === ""
+        data.flight_id === undefined || data.flight_id.trim() === ''
     ) {
         res.status(400).send("Bad input");
         return;
@@ -43,7 +43,7 @@ router.put('/:id', async (req, res) => {
     if (
         isNaN(id) ||
         data.title === undefined || data.title.trim() === "" ||
-        data.text === undefined || data.text.trim() === ""
+        data.flight_id === undefined || data.flight_id.trim() === ""
     ) {
         res.status(400).send("Bad input");
         return;

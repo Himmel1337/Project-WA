@@ -4,8 +4,7 @@ create table reservations
         constraint reservations_pk
             primary key autoincrement,
     title           TEXT    not null,
-    text            TEXT,
-    flights_id      integer
+    flight_id      integer
         constraint reservations_flights_fk
             references flights
 );
