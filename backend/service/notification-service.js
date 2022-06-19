@@ -4,10 +4,10 @@ class NotificationService {
 
     async getAll(order = "id") {
 
-        let orderByColumn = order === "name" ? "name" : "id";
+        let orderByColumn = order === "id" ? "id" : "id";
 
         return await database().all(
-            "SELECT * FROM notifications ORDER BY " + orderByColumn
+            "SELECT * FROM notifications ORDER BY id DESC"
         );
     }
 

@@ -1,73 +1,79 @@
 <template>
-  <error v-if="userStore.error" :text="userStore.error" @hide="userStore.clearError()"></error>
-  <success v-if="userStore.success" :text="userStore.success" @hide="userStore.clearSuccess()"></success>
-  <v-alert type="warning" v-else-if="userStore.loginMessage" class="mb-7">{{ userStore.loginMessage }}</v-alert>
+  <h1 class="d-flex align-center mb-4">
+    Notifications
+    <v-spacer/>
+    <v-btn @click="addNotification()" color="red" >+ Add</v-btn>
+  </h1>
 
-  <div v-if="userStore.isloading">Load user ...</div>
+  <error v-if="notificationStore.error" :text="notificationStore.error" @hide="notificationStore.clearError()"></error>
+  <v-progress-circular v-if="notificationStore.isLoading" color="primary" indeterminate size="100" width="10" class="ma-5"/>
+  <div v-else-if="notificationStore.notifications.length === 0">No notifications.</div>
   <div v-else>
-    <h1>User</h1>
-<!--    <v-form v-model="form" lazy-validation ref="form">-->
-<!--      <v-text-field-->
-<!--          v-model="flight.name"-->
-<!--          label="Name"-->
-<!--      ></v-text-field>-->
-<!--      <v-text-field-->
-<!--          v-model="flight.capacity"-->
-<!--          type="number"-->
-<!--          label="Date"-->
-<!--      ></v-text-field>-->
-<!--      <v-text-field-->
-<!--          v-model="flight.date"-->
-<!--          type="date"-->
-<!--          label="Date"-->
-<!--      ></v-text-field>-->
-<!--      <v-text-field-->
-<!--          v-model="flight.time"-->
-<!--          type="time"-->
-<!--          label="Time"-->
-<!--      ></v-text-field>-->
-<!--      <v-btn @click="changeFlight(flight.id, flight)" color="green">Change</v-btn>-->
-<!--    </v-form>-->
+      <v-alert v-for="notification in notificationStore.notifications" :type="notification.type" class="mb-5">
+        <v-card>
+<!--          <router-link :to="{name: 'notification-detail', params: {id: notification.id}}">-->
+<!--            <v-img src="https://static.scientificamerican.com/sciam/assets/Image/INLINE%20IMAGE%204%20-%2048954138962_9813a1461d_o.jpg"></v-img>-->
+<!--          </router-link>-->
+
+          <v-card-header>
+            <v-card-header-text>
+              <v-card-title>
+                {{ notification.name }}
+              </v-card-title>
+            </v-card-header-text>
+          </v-card-header>
+
+<!--          <v-card-text>-->
+<!--            Date:  {{ notification.text.length > 30 ? notification.text.substr(0, 30) + '...' : notification.text }}-->
+<!--          </v-card-text>-->
+
+
+<!--          <v-card-actions>-->
+<!--            <v-btn color="primary" :to="{name: 'notification-detail', params: {id: notification.id}}">Change</v-btn>-->
+<!--            <v-spacer/>-->
+<!--            <v-btn v-if="notificationStore.isDeleting !== notification.id"-->
+<!--                   color="grey" icon="mdi-delete" @click.prevent="notificationStore.delete(notification.id)"></v-btn>-->
+<!--            <v-progress-circular v-else color="red" indeterminate></v-progress-circular>-->
+<!--          </v-card-actions>-->
+        </v-card>
+      </v-alert>
   </div>
 </template>
 
 <script>
+import {useNotificationStore} from "../stores/NotificationStore";
 import {mapStores} from "pinia/dist/pinia";
-import {useUserStore} from "../stores/UserStore";
 import Error from "../components/Error.vue"
-import Success from "../components/Success.vue";
 
 export default {
-  name: "UserDetail",
+  name: "Notifications",
 
   components: {
-    Error, Success
+    Error,
   },
 
   data() {
     return {
-      formValid: true,
-    };
+    }
   },
 
   created() {
-    this.userStore.loadById(this.id);
+    this.notificationStore.loadAll()
   },
 
   computed: {
-    ...mapStores(useUserStore),
-
-    id() {
-      return parseInt(this.$route.params.id);
-    },
-
+    ...mapStores(useNotificationStore)
   },
 
   methods: {
-
+    addNotification() {
+      this.$router.push({name: 'addNotification'});
+      this.userMenuShown = false;
+    },
   }
 }
 </script>
 
-<style>
+<style scoped>
+
 </style>
