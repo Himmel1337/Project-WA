@@ -2,7 +2,7 @@
   <h1 class="d-flex align-center mb-4">
     Flights
     <v-spacer/>
-    <v-btn @click="addFlight()" color="primary" >+ Add</v-btn>
+    <v-btn @click="addFlight()" color="red" >+ Add</v-btn>
   </h1>
 
   <error v-if="flightStore.error" :text="flightStore.error" @hide="flightStore.clearError()"></error>
@@ -25,9 +25,17 @@
           </v-card-header>
 
           <v-card-text>
-            {{ flight.date.length > 30 ? flight.date.substr(0, 30) + '...' : flight.date }}
-            {{ flight.time.length > 30 ? flight.time.substr(0, 30) + '...' : flight.time }}
+           Date:  {{ flight.date.length > 30 ? flight.date.substr(0, 30) + '...' : flight.date }}
           </v-card-text>
+
+          <v-card-text>
+           Time:  {{ flight.time.length > 30 ? flight.time.substr(0, 30) + '...' : flight.time }}
+          </v-card-text>
+
+          <v-card-text>
+            Capacity: {{ flight.capacity }}
+          </v-card-text>
+
 
           <v-card-actions>
             <v-btn color="primary" :to="{name: 'flight-detail', params: {id: flight.id}}">Show</v-btn>

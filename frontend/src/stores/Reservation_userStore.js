@@ -51,8 +51,6 @@ export const useReservation_userStore = defineStore('reservation_user', {
                 this.reservation_users.push(reservation_user);
                 this.error = null;
                 this.isLoading = false;
-                this.error = null;
-                this.isLoading = false;
             } catch {
                 this.error = 'Cannot add User to Reservation';
             }

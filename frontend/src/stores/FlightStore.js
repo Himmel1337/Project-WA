@@ -9,6 +9,7 @@ export const useFlightStore = defineStore('flight', {
         isAdding: true,
         isDeleting: false,
         error: null,
+        success: null,
     }),
 
     getters: {
@@ -42,16 +43,18 @@ export const useFlightStore = defineStore('flight', {
             }
         },
 
-        async addFlight(name, date, time) {
+        async addFlight(name, capacity, date, time) {
             try {
+
                 this.isLoading = true;
-                const data = {name, date, time};
-                await axios.post(config.backendUrl + '/flights', data);
-                this.flights.push(flight);
+                const data = {name, capacity, date, time};
                 this.error = null;
+                this.success = "Created flight";
+                await axios.post(config.backendUrl + '/flights', data);
                 this.isLoading = false;
 
             } catch {
+                this.success = null;
                 this.error = 'Cannot create flight!';
             }
         },
@@ -76,11 +79,13 @@ export const useFlightStore = defineStore('flight', {
         async changeFlight(id, flight){
             try {
                 this.isLoading = true;
-                await axios.put(`${config.backendUrl}/flights/${id}`, flight);
                 this.error = null;
+                this.success = "Change flight";
+                await axios.put(`${config.backendUrl}/flights/${id}`, flight);
                 this.isLoading = false;
 
             } catch {
+                this.success = null;
                 this.error = 'Cannot change flight!';
             }
         },
@@ -96,6 +101,10 @@ export const useFlightStore = defineStore('flight', {
 
         clearError() {
             this.error = null;
-        }
+        },
+
+        clearSuccess() {
+            this.success = null;
+        },
     }
 })

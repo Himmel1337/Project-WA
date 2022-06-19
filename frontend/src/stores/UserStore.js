@@ -15,6 +15,7 @@ export const useUserStore = defineStore('user', {
       users: [],
       token: oldToken,
       error: null,
+      success: null,
       isLoggingIn: false,
       loginMessage: null,
       afterLoginRoute: null,
@@ -32,31 +33,20 @@ export const useUserStore = defineStore('user', {
         this.isLoggingIn = true;
 
         const data = {username, password};
+        this.error = null;
+        this.success = "Loged in";
         const response = await axios.post(config.backendUrl + '/users/login', data);
 
         this.token = response.data.token;
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.token;
         localStorage.setItem('token', this.token);
 
-        this.error = null;
         this.loginMessage = null;
         this.isLoggingIn = false;
 
       } catch {
+        this.success = null
         this.error = 'Cannot log in!';
-      }
-    },
-
-    async addUser(username, password, role) {
-      try {
-        this.isLoading = true;
-        const data = {username, password, role};
-        await axios.post(config.backendUrl + '/user', data);
-        this.error = null;
-        this.isLoading = false;
-
-      } catch {
-        this.error = 'Cannot create user!';
       }
     },
 
@@ -78,6 +68,10 @@ export const useUserStore = defineStore('user', {
       this.error = null;
     },
 
+    clearSuccess() {
+      this.success = null;
+    },
+
     async loadAll() {
       try {
         this.isLoading = true;
@@ -87,6 +81,27 @@ export const useUserStore = defineStore('user', {
         this.isLoading = false;
       } catch {
         this.error = 'Cannot download users!';
+      }
+    },
+
+    async addUser(username, password, role) {
+      this.isLoading = true;
+      const response = await axios.get(config.backendUrl + '/users');
+      this.users = response.data;
+      for (let i = 0; i < this.users.length; i++){
+        if (username === this.users[i].username) this.error = "Username is alredy exist";
+      }
+      try {
+        this.isLoading = true;
+        const data = {username, password, role};
+        this.error = null;
+        this.success = "Created user";
+        await axios.post(config.backendUrl + '/users', data);
+        this.isLoading = false;
+
+      } catch {
+        this.success = null;
+        this.error = 'Cannot create user!';
       }
     },
 

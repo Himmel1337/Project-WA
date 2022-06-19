@@ -5,9 +5,9 @@
   <div v-else>
     <h1>reservation {{ reservation.name }}</h1>
 
-      {{ flight.name }}
-      {{ flight.date }}
-      {{ flight.time }}
+<!--      {{ flight.name }}-->
+<!--      {{ flight.date }}-->
+<!--      {{ flight.time }}-->
 
 
     <v-row>

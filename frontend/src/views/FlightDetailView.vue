@@ -1,5 +1,6 @@
 <template>
   <error v-if="flightStore.error" :text="flightStore.error" @hide="flightStore.clearError()"></error>
+  <success v-if="flightStore.success" :text="flightStore.success" @hide="flightStore.clearSuccess()"></success>
   <v-alert type="warning" v-else-if="flightStore.loginMessage" class="mb-7">{{ flightStore.loginMessage }}</v-alert>
 
   <div v-if="flightStore.isloading">Change flight ...</div>
@@ -11,6 +12,11 @@
         label="Name"
       ></v-text-field>
       <v-text-field
+          v-model="flight.capacity"
+          type="number"
+          label="Date"
+      ></v-text-field>
+      <v-text-field
         v-model="flight.date"
         type="date"
         label="Date"
@@ -20,7 +26,7 @@
         type="time"
         label="Time"
       ></v-text-field>
-        <v-btn @click="changeFlight(flight.id, flight)" color="red">Change</v-btn>
+        <v-btn @click="changeFlight(flight.id, flight)" color="green">Change</v-btn>
     </v-form>
   </div>
 </template>
@@ -29,12 +35,13 @@
 import {mapStores} from "pinia/dist/pinia";
 import {useFlightStore} from "../stores/FlightStore";
 import Error from "../components/Error.vue"
+import Success from "../components/Success.vue";
 
 export default {
   name: "FlightDetail",
 
   components: {
-    Error,
+    Error, Success
   },
 
   data() {

@@ -2,7 +2,7 @@
   <h1 class="d-flex align-center mb-4">
     Reservations
     <v-spacer/>
-    <v-btn @click="addReservation()" color="primary" >+ Add</v-btn>
+    <v-btn @click="addReservation()" color="red" >+ Add</v-btn>
   </h1>
 
   <error v-if="reservationStore.error" :text="reservationStore.error" @hide="reservationStore.clearError()"></error>

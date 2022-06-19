@@ -1,5 +1,6 @@
 <template>
   <error v-if="reservationStore.error" :text="reservationStore.error" @hide="reservationStore.clearError()"></error>
+  <success v-if="reservationStore.success" :text="reservationStore.success" @hide="reservationStore.clearSuccess()"></success>
   <v-alert type="warning" v-else-if="reservationStore.loginMessage" class="mb-7">{{ reservationStore.loginMessage }}</v-alert>
 
   <div v-if="reservationStore.isloading">Create reservation ...</div>
@@ -8,11 +9,13 @@
       <v-text-field
           v-model="name"
           label="Name"
+          :rules="nameRules"
       ></v-text-field>
       <v-select
           :items="arrayFlightsId()"
           label="Flight"
           v-model="flight_id"
+          :rules="flightRules"
       ></v-select>
       <v-combobox
           v-model="usersId"
@@ -20,7 +23,7 @@
           label="Users"
           multiple
       ></v-combobox>
-      <v-btn @click="addUserToReservation()" color="red">Create</v-btn>
+      <v-btn @click="addUserToReservation()" color="green">Create</v-btn>
     </v-form>
   </div>
 </template>
@@ -35,12 +38,13 @@ import Error from "../components/Error.vue";
 import {useFlightStore} from "../stores/FlightStore";
 import {useUserStore} from "../stores/UserStore";
 import {useReservation_userStore} from "../stores/Reservation_userStore";
+import Success from "../components/Success.vue";
 
 export default {
   name: "AddReservation",
 
   components: {
-    Error
+    Error, Success,
   },
 
   data() {
@@ -49,6 +53,12 @@ export default {
       name: '',
       flight_id: '',
       usersId: [],
+      nameRules: [
+        v => !!v || 'Name is required',
+      ],
+      flightRules: [
+        v => !!v || 'Flight is required',
+      ],
     }
   },
 
@@ -94,6 +104,8 @@ export default {
       for (let i = 0; i < n; i++){
         await this.reservation_userStore.addReservation_user(lastId, this.usersId[i]);
       }
+      this.$router.push({name: 'reservations'});
+      this.userMenuShown = false;
     },
   }
 };

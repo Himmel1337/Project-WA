@@ -26,12 +26,13 @@
 import {mapStores} from "pinia/dist/pinia";
 import {useUserStore} from "../stores/UserStore";
 import Error from "../components/Error.vue";
+import Success from "../components/Success.vue";
 
 export default {
   name: "Login",
 
   components: {
-    Error,
+    Error, Success
   },
 
   data() {

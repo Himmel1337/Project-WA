@@ -25,6 +25,7 @@ router.post('/', async (req, res) => {
 
     if (
         data.name === undefined || data.name.trim() === "" ||
+        isNaN(data.capacity) || 
         data.date === undefined || data.date.trim() === "" ||
         data.time === undefined || data.time.trim() === "" 
     ) {
@@ -43,7 +44,10 @@ router.put('/:id', async (req, res) => {
 
     if (
         isNaN(id) ||
-        data.name === undefined || data.name.trim() === ""
+        data.name === undefined || data.name.trim() === "" ||
+        isNaN(data.capacity) ||
+        data.date === undefined || data.date.trim() === "" ||
+        data.time === undefined || data.time.trim() === ""
     ) {
         res.status(400).send("Bad input");
         return;

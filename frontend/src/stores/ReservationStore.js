@@ -9,6 +9,7 @@ export const useReservationStore = defineStore('reservation', {
     isAdding: true,
     isDeleting: false,
     error: null,
+    success: null,
   }),
 
   getters: {
@@ -46,28 +47,13 @@ export const useReservationStore = defineStore('reservation', {
       try {
         this.isLoading = true;
         const data = {name, flight_id};
+        this.success = "Create reservation";
+        this.error = null;
         await axios.post(config.backendUrl + '/reservations', data);
-        this.reservations.push(reservation);
-        this.error = null;
         this.isLoading = false;
       } catch {
+        this.success = null;
         this.error = 'Cannot create reservation!';
-      }
-    },
-
-    async addUserReservation(reservation_id, user_id) {
-      try {
-        console.log(reservation_id, user_id);
-        this.isLoading = true;
-        const data = {reservation_id, user_id};
-        await axios.post(config.backendUrl + '/reservation_user', data);
-        this.reservations.push(reservation_user);
-        this.error = null;
-        this.isLoading = false;
-        this.error = null;
-        this.isLoading = false;
-      } catch {
-        this.error = 'Cannot add User to Reservation';
       }
     },
 
@@ -99,6 +85,10 @@ export const useReservationStore = defineStore('reservation', {
 
     clearError() {
       this.error = null;
-    }
+    },
+
+    clearSuccess() {
+      this.success = null;
+    },
   }
 })
