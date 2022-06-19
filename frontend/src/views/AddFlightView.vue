@@ -8,19 +8,16 @@
       <v-text-field
           v-model="name"
           label="Name"
-          :rules="rules.required"
       ></v-text-field>
       <v-text-field
           v-model="date"
           label="Date"
           type="date"
-          :rules="rules.required"
       ></v-text-field>
       <v-text-field
           v-model="time"
           label="Time"
           type="time"
-          :rules="rules.required"
       ></v-text-field>
       <v-btn @click="addFlight()" color="primary">Create</v-btn>
     </v-form>
@@ -46,9 +43,6 @@ export default {
       name: '',
       date: '',
       time: '',
-      rules: {
-        required: value => !!value || 'Required.',
-      }
     }
   },
 
@@ -61,7 +55,6 @@ export default {
       await this.$refs.form.validate();
       if (!this.formValid) return;
       await this.flightStore.addFlight(this.name, this.date, this.time);
-
     },
   }
 }

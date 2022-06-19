@@ -43,17 +43,18 @@ export const useReservation_userStore = defineStore('reservation_user', {
         },
 
 
-        async addReservation_user(title, text, time) {
+        async addReservation_user(reservation_id, user_id) {
             try {
                 this.isLoading = true;
-                const data = {title, text, time};
+                const data = {reservation_id, user_id};
                 await axios.post(config.backendUrl + '/reservation_user', data);
                 this.reservation_users.push(reservation_user);
                 this.error = null;
                 this.isLoading = false;
-
+                this.error = null;
+                this.isLoading = false;
             } catch {
-                this.error = 'Cannot create reservation_user!';
+                this.error = 'Cannot add User to Reservation';
             }
         },
 

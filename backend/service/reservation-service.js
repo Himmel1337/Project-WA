@@ -4,7 +4,7 @@ class ReservationService {
 
     async getAll(order = "id") {
 
-        let orderByColumn = order === "title" ? "title" : "id";
+        let orderByColumn = order === "name" ? "name" : "id";
 
         return await database().all(
             "SELECT * FROM reservations ORDER BY " + orderByColumn
@@ -20,16 +20,16 @@ class ReservationService {
 
     async create(reservation) {
         const result = await database().run(
-            "INSERT INTO reservations (title, flight_id) VALUES (?, ?)",
-            reservation.title, reservation.flight_id
+            "INSERT INTO reservations (name, flight_id) VALUES (?, ?)",
+            reservation.name, reservation.flight_id
         );
         return await this.getById(result.lastID);
     }
 
     async update(id, reservation) {
         const result = await database().run(
-            "UPDATE reservations SET title = ? WHERE id = ?",
-            reservation.title, id
+            "UPDATE reservations SET name = ?, flight_id = ? WHERE id = ?",
+            reservation.name, id
         );
 
         if (result.changes === 0) {

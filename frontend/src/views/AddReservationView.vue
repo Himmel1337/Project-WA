@@ -6,27 +6,21 @@
   <div v-else>
     <v-form v-model="form" lazy-validation ref="form">
       <v-text-field
-          v-model="title"
-          label="Title"
-          :rules="rules.required"
+          v-model="name"
+          label="Name"
       ></v-text-field>
       <v-select
-          v-model="flight"
-          :items="flightStore.flights"
-          @input="selectFlightId($event)"
+          :items="arrayFlightsId()"
           label="Flight"
-          persistent-hint
-          return-object
-          single-line
+          v-model="flight_id"
       ></v-select>
       <v-combobox
-          v-model="users"
-          :items="userStore.users"
-          item-text="username"
+          v-model="usersId"
+          :items="arrayUsersId()"
           label="Users"
           multiple
       ></v-combobox>
-      <v-btn @click="addReservation()" color="primary">Create</v-btn>
+      <v-btn @click="addUserToReservation()" color="red">Create</v-btn>
     </v-form>
   </div>
 </template>
@@ -40,48 +34,65 @@ import {useReservationStore} from "../stores/ReservationStore";
 import Error from "../components/Error.vue";
 import {useFlightStore} from "../stores/FlightStore";
 import {useUserStore} from "../stores/UserStore";
+import {useReservation_userStore} from "../stores/Reservation_userStore";
 
 export default {
   name: "AddReservation",
 
   components: {
-    Error,
+    Error
   },
 
   data() {
     return {
       formValid: true,
       name: '',
-      date: '',
-      time: '',
-      rules: {
-        required: value => !!value || 'Required.',
-      }
+      flight_id: '',
+      usersId: [],
     }
   },
 
   created() {
+    this.reservationStore.loadAll();
     this.flightStore.loadAll()
     this.userStore.loadAll();
   },
 
   computed: {
-    ...mapStores(useReservationStore, useFlightStore, useUserStore),
+    ...mapStores(useReservationStore, useFlightStore, useUserStore, useReservation_userStore),
   },
 
   methods: {
 
-    selectFlightId (e) {
-      this.selectFlightId = e.id;
+    arrayFlightsId() {
+      let arrayFlightId = [];
+      const n = this.flightStore.flights.length;
+      for (let i = 0; i < n; i++){
+        arrayFlightId.push(this.flightStore.flights[i].id);
+      }
+      return arrayFlightId;
     },
 
-    async addReservation(title, flight, users) {
+    arrayUsersId() {
+      let arrayUsersId = [];
+      const n = this.userStore.users.length;
+
+      for (let i = 0; i < n; i++){
+        arrayUsersId.push(this.userStore.users[i].id);
+      }
+
+      return arrayUsersId;
+    },
+
+    async addUserToReservation(name, flight_id, usersId) {
+
+      const lastId = this.reservationStore.reservations[(this.reservationStore.reservations.length) - 1].id + 1;
       await this.$refs.form.validate();
       if (!this.formValid) return;
-      await this.reservationStore.addReservation(this.title, this.flight);
-      const n = this.users.length;
+      await this.reservationStore.addReservation(this.name, this.flight_id);
+      const n = this.usersId.length;
       for (let i = 0; i < n; i++){
-        await this.reservationStore.addUserReservation(1, i);
+        await this.reservation_userStore.addReservation_user(lastId, this.usersId[i]);
       }
     },
   }

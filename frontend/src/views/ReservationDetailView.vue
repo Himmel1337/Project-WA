@@ -30,7 +30,7 @@ import {mapStores} from "pinia/dist/pinia";
 import {useReservationStore} from "../stores/ReservationStore";
 import {useFlightStore} from "../stores/FlightStore";
 import {useUserStore} from "../stores/UserStore"
-import {useReservation_userStore} from "../stores/reservation_userStore";
+import {useReservation_userStore} from "../stores/Reservation_userStore";
 import Error from "../components/Error.vue"
 
 export default {
