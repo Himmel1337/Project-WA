@@ -1,18 +1,27 @@
 <template>
   <error v-if="flightStore.error" :text="flightStore.error" @hide="flightStore.clearError()"></error>
+  <v-alert type="warning" v-else-if="flightStore.loginMessage" class="mb-7">{{ flightStore.loginMessage }}</v-alert>
 
-  <div v-if="flightStore.isLoading">Loading...</div>
+  <div v-if="flightStore.isloading">Change flight ...</div>
   <div v-else>
     <h1>Flight</h1>
-    <v-text-field
+    <v-form v-model="form" lazy-validation ref="form">
+      <v-text-field
         v-model="flight.name"
         label="Name"
-    ></v-text-field>
-    <v-text-field
-        v-model="flight.time"
+      ></v-text-field>
+      <v-text-field
+        v-model="flight.date"
         type="date"
+        label="Date"
+      ></v-text-field>
+      <v-text-field
+        v-model="flight.time"
+        type="time"
         label="Time"
-    ></v-text-field>
+      ></v-text-field>
+        <v-btn @click="changeFlight(flight.id, flight)" color="red">Change</v-btn>
+    </v-form>
   </div>
 </template>
 
@@ -28,6 +37,15 @@ export default {
     Error,
   },
 
+  data() {
+    return {
+      formValid: true,
+      rules: {
+        required: value => !!value || 'Required.',
+      },
+    };
+  },
+
   created() {
     this.flightStore.loadById(this.id);
   },
@@ -41,7 +59,16 @@ export default {
 
     flight() {
       return this.flightStore.getById(this.id);
-    }
+    },
+  },
+
+  methods: {
+
+    async changeFlight(id, flight) {
+      await this.$refs.form.validate();
+      if (!this.formValid) return;
+      await this.flightStore.changeFlight(this.id, this.flight);
+    },
   }
 }
 </script>

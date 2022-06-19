@@ -43,9 +43,7 @@ router.put('/:id', async (req, res) => {
 
     if (
         isNaN(id) ||
-        data.name === undefined || data.name.trim() === "" ||
-        data.date === undefined || data.date.trim() === "" ||
-        data.time === undefined || data.time.trim() === ""
+        data.name === undefined || data.name.trim() === ""
     ) {
         res.status(400).send("Bad input");
         return;

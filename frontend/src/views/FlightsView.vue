@@ -25,6 +25,7 @@
           </v-card-header>
 
           <v-card-text>
+            {{ flight.date.length > 30 ? flight.date.substr(0, 30) + '...' : flight.date }}
             {{ flight.time.length > 30 ? flight.time.substr(0, 30) + '...' : flight.time }}
           </v-card-text>
 

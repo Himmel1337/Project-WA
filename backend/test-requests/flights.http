@@ -86,7 +86,8 @@ Content-Type: application/json
 
 {
   "name": "Earth",
-  "time": "2022-12-21 21:00:00"
+  "date": "2022-12-21",
+  "time": "21:00"
 }
 
 <> 2022-02-21T150553.404.html

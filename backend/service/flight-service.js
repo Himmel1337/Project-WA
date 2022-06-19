@@ -28,14 +28,14 @@ class FlightService {
 
     async update(id, flight) {
         const result = await database().run(
-            "UPDATE flights SET name = ?, data = ?, time = ? WHERE id = ?",
+            "UPDATE flights SET name = ?, date = ?, time = ? WHERE id = ?",
             flight.name, flight.date, flight.time, id
         );
 
         if (result.changes === 0) {
-            return null;
+            return null; 
         } else {
-            return await this.getById(id);
+            return await this.getById(id); 
         }
     }
 

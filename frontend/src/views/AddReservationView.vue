@@ -8,6 +8,7 @@
       <v-text-field
           v-model="title"
           label="Title"
+          :rules="rules.required"
       ></v-text-field>
       <v-select
           v-model="flight"
@@ -50,11 +51,13 @@ export default {
   data() {
     return {
       formValid: true,
-      flight: {id: 0, title: 'Mars', text: 'Mars', time: '21-12-2055 23:00'},
-      selectFlightId: '',
-      flights: [{}],
-      users: [{id: 1, username: 'dd', role: 'ss'}],
-    };
+      name: '',
+      date: '',
+      time: '',
+      rules: {
+        required: value => !!value || 'Required.',
+      }
+    }
   },
 
   created() {

@@ -8,17 +8,19 @@
       <v-text-field
           v-model="name"
           label="Name"
-          :rules="flightRules"
+          :rules="rules.required"
       ></v-text-field>
       <v-text-field
           v-model="date"
           label="Date"
           type="date"
+          :rules="rules.required"
       ></v-text-field>
       <v-text-field
           v-model="time"
           label="Time"
           type="time"
+          :rules="rules.required"
       ></v-text-field>
       <v-btn @click="addFlight()" color="primary">Create</v-btn>
     </v-form>
@@ -44,9 +46,9 @@ export default {
       name: '',
       date: '',
       time: '',
-      flightRules: [
-        v => !!v || 'Time is required',
-      ]
+      rules: {
+        required: value => !!value || 'Required.',
+      }
     }
   },
 
