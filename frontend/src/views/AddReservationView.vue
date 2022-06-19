@@ -96,7 +96,8 @@ export default {
 
     async addUserToReservation(name, flight_id, usersId) {
 
-      const lastId = this.reservationStore.reservations[(this.reservationStore.reservations.length) - 1].id + 1;
+      let lastId = this.reservationStore.reservations[(this.reservationStore.reservations.length) - 1].id + 1;
+      if (lastId == 0) lastId = 1;
       await this.$refs.form.validate();
       if (!this.formValid) return;
       await this.reservationStore.addReservation(this.name, this.flight_id);
@@ -104,6 +105,7 @@ export default {
       for (let i = 0; i < n; i++){
         await this.reservation_userStore.addReservation_user(lastId, this.usersId[i]);
       }
+
       this.$router.push({name: 'reservations'});
       this.userMenuShown = false;
     },

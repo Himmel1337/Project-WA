@@ -1,17 +1,24 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
+
 import ReservationsView from '../views/ReservationsView.vue'
 import ReservationDetailView from '../views/ReservationDetailView.vue'
-import AddReservationView from "../views/AddReservationView.vue";
+import AddReservationView from '../views/AddReservationView.vue';
+
 import FlightsView from '../views/FlightsView.vue'
 import FlightDetailView from '../views/FlightDetailView.vue'
-import AddFlightView from "../views/AddFlightView.vue";
+import AddFlightView from '../views/AddFlightView.vue';
+
 import RegisterView from '../views/RegistrationView.vue'
 import AuthSection from "../AuthSection.vue";
-import LoginView from "../views/LoginView.vue";
-import NotificationView from "../views/NotificationView.vue";
-import {useUserStore} from "../stores/UserStore";
+import LoginView from '../views/LoginView.vue';
+import {useUserStore} from '../stores/UserStore';
+
+import NotificationView from '../views/NotificationView.vue';
+import AddNotificationView from '../views/AddNotificationView.vue';
+
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -47,6 +54,11 @@ const router = createRouter({
           path: 'notification',
           name: 'notification',
           component: NotificationView
+        },
+        {
+          path: 'addNotification',
+          name: 'addNotification',
+          component: AddNotificationView
         },
         {
           path: 'reservations',

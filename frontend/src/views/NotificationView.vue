@@ -1,6 +1,6 @@
 <template>
   <h1 class="d-flex align-center mb-4">
-    Notifications
+    Notification
     <v-spacer/>
     <v-btn @click="addNotification()" color="red" >+ Add</v-btn>
   </h1>
@@ -11,21 +11,13 @@
   <div v-else>
       <v-alert v-for="notification in notificationStore.notifications" :type="notification.type" class="mb-5">
         <v-card>
-<!--          <router-link :to="{name: 'notification-detail', params: {id: notification.id}}">-->
-<!--            <v-img src="https://static.scientificamerican.com/sciam/assets/Image/INLINE%20IMAGE%204%20-%2048954138962_9813a1461d_o.jpg"></v-img>-->
-<!--          </router-link>-->
-
           <v-card-header>
             <v-card-header-text>
               <v-card-title>
-                {{ notification.name }}
+                {{ notification.name }}: {{ notification.text }}
               </v-card-title>
             </v-card-header-text>
           </v-card-header>
-
-<!--          <v-card-text>-->
-<!--            Date:  {{ notification.text.length > 30 ? notification.text.substr(0, 30) + '...' : notification.text }}-->
-<!--          </v-card-text>-->
 
 
 <!--          <v-card-actions>-->
