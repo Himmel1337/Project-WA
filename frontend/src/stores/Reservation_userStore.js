@@ -62,7 +62,7 @@ export const useReservation_userStore = defineStore('reservation_user', {
             try {
                 this.isDeleting = id;
 
-                await axios.delete(`${config.backendUrl}/reservation_users/${id}`);
+                await axios.delete(`${config.backendUrl}/reservation_user/${id}`);
 
                 const index = this.reservation_users.findIndex(a => a.id === id);
                 this.reservation_users.splice(index, 1);
@@ -87,5 +87,5 @@ export const useReservation_userStore = defineStore('reservation_user', {
         clearError() {
             this.error = null;
         }
-    }
+    },
 })

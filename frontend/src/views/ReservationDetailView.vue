@@ -3,14 +3,17 @@
 
   <div v-if="reservationStore.isLoading">Loading...</div>
   <div v-else>
-    <h1>reservation {{ reservation.title }}</h1>
+    <h1>reservation {{ reservation.name }}</h1>
 
-    <p>{{ flight.title }}</p>
-    <p>{{ flight.time }}</p>
+      {{ flight.name }}
+      {{ flight.date }}
+      {{ flight.time }}
+
 
     <v-row>
       <v-col cols="4" v-for="user in users_username">
         <v-card>
+
           <v-card-header>
             <v-card-header-text>
               <v-card-title>
@@ -18,10 +21,17 @@
               </v-card-title>
             </v-card-header-text>
           </v-card-header>
+
+
+          <v-card-actions>
+            <v-spacer/>
+            <v-btn v-if="flightStore.isDeleting !== user.id" color="grey" icon="mdi-delete"
+                   @click.prevent="reservation_userStore.delete(user.id)"></v-btn>
+            <v-progress-circular v-else color="red" indeterminate></v-progress-circular>
+          </v-card-actions>
         </v-card>
       </v-col>
     </v-row>
-
   </div>
 </template>
 
@@ -42,6 +52,7 @@ export default {
 
   data() {
     return {
+      flight: {}
     }
   },
 
@@ -79,13 +90,16 @@ export default {
         }
       }
 
+
       let users_username = [];
 
       for(let i = 0; i < n; i++){
         if(users_id[i].user_id === this.userStore.users[i].id){
           users_username.push(this.userStore.users[i]);
+          users_username[i].id = users_id[i].id
         }
       }
+
       return users_username;
     }
   }

@@ -54,7 +54,7 @@ export default {
 
   created() {
     this.reservationStore.loadAll();
-    this.flightStore.loadAll()
+    this.flightStore.loadAll();
     this.userStore.loadAll();
   },
 

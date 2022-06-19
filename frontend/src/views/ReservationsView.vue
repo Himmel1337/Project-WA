@@ -19,7 +19,7 @@
           <v-card-header>
             <v-card-header-text>
               <v-card-title>
-                {{ reservation.title }}
+                {{ reservation.name }}
               </v-card-title>
             </v-card-header-text>
           </v-card-header>
@@ -40,7 +40,7 @@
 import {useReservationStore} from "../stores/ReservationStore";
 import {mapStores} from "pinia/dist/pinia";
 import Error from "../components/Error.vue"
-import {useUserStore} from "../stores/UserStore";
+import {useFlightStore} from "../stores/FlightStore";
 
 export default {
   name: "Reservations",
@@ -55,11 +55,11 @@ export default {
   },
 
   created() {
-    this.reservationStore.loadAll()
+    this.reservationStore.loadAll();
   },
 
   computed: {
-    ...mapStores(useReservationStore, useUserStore)
+    ...mapStores(useReservationStore)
   },
 
   methods: {
