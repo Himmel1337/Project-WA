@@ -26,3 +26,5 @@ Požadavky:
 - Verzování v gitu (nebudou skceptovány projekty, kde většina práce je udělaná v posledních dnech před obhajobou, nebo práce, kde je veškerá práce v několika málo commitech).
 - Aplikace musí být přenositelná (spustitelná na jiném počítači z gitu, doporučuji vyzkoušet).
 - Osobní obhajoba projektu ve zkouškovém.
+
+

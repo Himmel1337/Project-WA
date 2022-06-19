@@ -9,7 +9,7 @@
       <v-btn :to="{name: 'home'}">Homepage</v-btn>
       <v-btn :to="{name: 'reservations'}">Reservations</v-btn>
       <v-btn :to="{name: 'flights'}">Flights</v-btn>
-      <v-btn :to="{name: 'about'}">About</v-btn>
+      <v-btn :to="{name: 'notification'}">Notification</v-btn>
 
       <v-menu anchor="bottom end" v-model="userMenuShown">
         <template v-slot:activator="{ props }">
@@ -26,7 +26,7 @@
             <v-list-item-title>Register</v-list-item-title>
           </v-list-item>
           <v-list-item v-if="userStore.isAuthenticated">
-            <v-list-item-title class="pr-1"><i>{{ userStore.user.username }}</i></v-list-item-title>
+            <v-list-item-title class="pr-1"><i> {{ userStore.user.username }}</i></v-list-item-title>
           </v-list-item>
           <v-list-item v-if="userStore.isAuthenticated" @click="logout()">
             <v-list-item-title>Log out</v-list-item-title>

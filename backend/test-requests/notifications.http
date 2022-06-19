@@ -1,0 +1,111 @@
+### All notifications
+
+GET http://localhost:3000/notifications?order=name
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InhwaXNhcm92Iiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjQ2ODExMzU2fQ.VYGzeYuPipA_qm5uNdHvGqORMLUFzolhHMUJDINl-tg
+
+<> 2022-02-21T150421.200.json
+<> 2022-02-21T150411.200.json
+<> 2022-02-21T145911.200.json
+<> 2022-02-21T145708.200.json
+<> 2022-02-21T145641.200.json
+<> 2022-02-21T145521.200.json
+<> 2022-02-21T145515.200.json
+<> 2022-02-21T145457.200.json
+<> 2022-02-21T145443.200.json
+<> 2022-02-21T145434.200.json
+<> 2022-02-21T145402.200.json
+<> 2022-02-21T145351.200.json
+<> 2022-02-21T145150.200.json
+<> 2022-02-21T144037.200.json
+<> 2022-02-21T104921.200.json
+
+### Fetch Existing notification
+
+GET http://localhost:3000/notifications/1
+Accept: application/json
+
+<> 2022-02-21T143810.200.json
+<> 2022-02-21T105334.200.json
+<> 2022-02-21T105316.404.html
+<> 2022-02-21T105230.404.html
+<> 2022-02-21T105214.404.html
+<> 2022-02-21T105147.404.html
+
+
+### Fetch Nonexisting notification
+
+GET http://localhost:3000/notifications/33
+
+<> 2022-02-21T143807.404.html
+<> 2022-02-21T105352.404.html
+<> 2022-02-21T105126.404.html
+<> 2022-02-21T105023.400.html
+
+### Create New notification
+
+POST http://localhost:3000/notifications
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InhwaXNhcm92IiwiaWF0IjoxNjQ2NjQ4NTAwfQ.glFwNCz-COBG-B8AiiNAQmjZfwx0haPoz7lxABVQJik
+
+{
+  "name": "Error",
+  "text": "error",
+  "type": "error"
+}
+
+<> 2022-02-21T145145.201.json
+<> 2022-02-21T145139.400.html
+<> 2022-02-21T145134.400.html
+<> 2022-02-21T145126.400.html
+<> 2022-02-21T144818.201.json
+<> 2022-02-21T144812.201.json
+<> 2022-02-21T144646.201.json
+<> 2022-02-21T144638.400.html
+<> 2022-02-21T144542.500.html
+<> 2022-02-21T144539.500.html
+<> 2022-02-21T144507.500.html
+<> 2022-02-21T144436.500.html
+
+### Update existing notification
+
+PUT http://localhost:3000/notifications/1
+Content-Type: application/json
+
+{
+  "name": "Error",
+  "text": "error",
+  "type": "error"
+}
+
+<> 2022-02-21T150556.202.json
+
+### Update nonexisting notification
+
+PUT http://localhost:3000/notifications/33
+Content-Type: application/json
+
+{
+  "name": "Error",
+  "text": "error",
+  "type": "error"
+}
+
+<> 2022-02-21T150553.404.html
+<> 2022-02-21T150506.500.html
+<> 2022-02-21T150430.400.html
+<> 2022-02-21T150418.202.json
+<> 2022-02-21T150403.202.json
+
+### Delete Existing notification
+
+DELETE http://localhost:3000/notifications/3
+Accept: application/json
+
+### Delete Nonexisting notification
+
+DELETE http://localhost:3000/notifications/133
+Accept: application/json
+
+<> 2022-02-21T144029.404.html
+
+

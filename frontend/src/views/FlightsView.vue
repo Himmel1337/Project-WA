@@ -6,6 +6,7 @@
   </h1>
 
   <error v-if="flightStore.error" :text="flightStore.error" @hide="flightStore.clearError()"></error>
+  <v-alert type="warning" v-else-if="reservationStore.loginMessage" class="mb-7">{{ reservationStore.loginMessage }}</v-alert>
   <v-progress-circular v-if="flightStore.isLoading" color="primary" indeterminate size="100" width="10" class="ma-5"/>
   <div v-else-if="flightStore.flights.length === 0">No flights.</div>
   <div v-else>
@@ -38,7 +39,7 @@
 
 
           <v-card-actions>
-            <v-btn color="primary" :to="{name: 'flight-detail', params: {id: flight.id}}">Show</v-btn>
+            <v-btn color="primary" :to="{name: 'flight-detail', params: {id: flight.id}}">Change</v-btn>
             <v-spacer/>
             <v-btn v-if="flightStore.isDeleting !== flight.id" color="grey" icon="mdi-delete" @click.prevent="flightStore.delete(flight.id)"></v-btn>
             <v-progress-circular v-else color="red" indeterminate></v-progress-circular>

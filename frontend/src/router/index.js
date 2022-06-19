@@ -10,6 +10,7 @@ import AddFlightView from "../views/AddFlightView.vue";
 import RegisterView from '../views/RegistrationView.vue'
 import AuthSection from "../AuthSection.vue";
 import LoginView from "../views/LoginView.vue";
+import NotificationView from "../views/NotificationView.vue";
 import {useUserStore} from "../stores/UserStore";
 
 const router = createRouter({
@@ -42,6 +43,11 @@ const router = createRouter({
       component: AuthSection,
       beforeEnter: checkAuthentication,
       children: [
+        {
+          path: 'notification',
+          name: 'notification',
+          component: NotificationView
+        },
         {
           path: 'reservations',
           name: 'reservations',

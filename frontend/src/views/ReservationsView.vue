@@ -6,6 +6,7 @@
   </h1>
 
   <error v-if="reservationStore.error" :text="reservationStore.error" @hide="reservationStore.clearError()"></error>
+  <v-alert type="warning" v-else-if="reservationStore.loginMessage" class="mb-7">{{ reservationStore.loginMessage }}</v-alert>
   <v-progress-circular v-if="reservationStore.isLoading" color="primary" indeterminate size="100" width="10" class="ma-5"/>
   <div v-else-if="reservationStore.reservations.length === 0">No reservations.</div>
   <div v-else>
@@ -25,7 +26,7 @@
           </v-card-header>
 
           <v-card-actions>
-            <v-btn color="primary" :to="{name: 'reservation-detail', params: {id: reservation.id}}">Show</v-btn>
+            <v-btn color="primary" :to="{name: 'reservation-detail', params: {id: reservation.id}}">Change</v-btn>
             <v-spacer/>
             <v-btn v-if="reservationStore.isDeleting !== reservation.id" color="grey" icon="mdi-delete" @click.prevent="reservationStore.delete(reservation.id)"></v-btn>
             <v-progress-circular v-else color="red" indeterminate></v-progress-circular>
