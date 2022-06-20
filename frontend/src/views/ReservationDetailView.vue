@@ -33,6 +33,17 @@
         </v-card>
       </v-col>
     </v-row>
+    <br>
+
+    <v-form v-model="form" lazy-validation ref="form">
+      <v-combobox
+          v-model="usersId"
+          :items="arrayUsersId()"
+          label="Users"
+          multiple
+      ></v-combobox>
+      <v-btn @click="addUserToReservation(reservation.name, reservation.id)" color="green">Add users</v-btn>
+    </v-form>
   </div>
 </template>
 
@@ -55,7 +66,9 @@ export default {
 
   data() {
     return {
-      flight: {}
+      formValid: true,
+      flight: {},
+      usersId: [],
     }
   },
 
@@ -111,6 +124,40 @@ export default {
   },
 
   methods: {
+
+    arrayUsersId() {
+      let arrayUsersId = [];
+      const n = this.userStore.users.length;
+
+      for (let i = 0; i < n; i++){
+        arrayUsersId.push(this.userStore.users[i].id);
+      }
+
+      return arrayUsersId;
+    },
+
+    async addUserToReservation(reservation_name, reservation_id) {
+
+      await this.$refs.form.validate();
+      if (!this.formValid) return;
+
+      const n = this.usersId.length;
+      for (let i = 0; i < n; i++){
+        await this.reservation_userStore.addReservation_user(reservation_id, this.usersId[i]);
+      }
+
+      await this.notificationStore.addNotification("Change reservation: " + reservation_name,
+          " You were adding up to the reservation ", "info");
+
+      let lastIdNotification = this.notificationStore.notifications[0].id + 1;
+      if(lastIdNotification < 1) lastIdNotification = 1;
+
+
+      for (let i = 0; i < n; i++){
+        await this.notification_userStore.addNotification_user(lastIdNotification, this.usersId[i]);
+      }
+    },
+
     async deleteFromUserId (reservationId, userId, name){
       let i = 0;
 
