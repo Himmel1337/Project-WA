@@ -30,7 +30,7 @@ class Reservation_userService {
 
     async update(id, reservation_user) {
         const result = await database().run(
-            "UPDATE reservation_user SET reservation_id, user_id = ? WHERE id = ?",
+            "UPDATE reservation_user SET reservation_id = ?, user_id = ? WHERE id = ?",
             reservation_user.reservation_id, reservation_user.user_id, id
         );
 

@@ -75,6 +75,20 @@ export const useFlightStore = defineStore('flight', {
             }
         },
 
+        async changeFlight(id, flight){
+            try {
+                this.isLoading = true;
+                this.error = null;
+                this.success = "Change flight";
+                await axios.put(`${config.backendUrl}/flights/${id}`, flight);
+                this.isLoading = false;
+
+            } catch {
+                this.success = null;
+                this.error = 'Cannot change flight!';
+            }
+        },
+
 
 
         addOrUpdateInStore(id, flight) {

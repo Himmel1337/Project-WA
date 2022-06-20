@@ -7,17 +7,14 @@
     </div>
   </h1>
 
-
-
   <error v-if="notificationStore.error" :text="notificationStore.error" @hide="notificationStore.clearError()"></error>
   <v-progress-circular v-if="notificationStore.isLoading" color="primary" indeterminate size="100" width="10" class="ma-5"/>
   <div v-else-if="notificationStore.notifications.length === 0">No notifications.</div>
   <div v-else>
-   <p>  </p>
-      <v-alert v-for="notification in notifications()" :type="notification.type"
-               class="mb-5" closable>
+    <div v-for="notification in notifications()">
+    <v-alert v-if="notification.archive === 0" :type="notification.type"
+              class="mb-5" closable>
 
-<!--        <div v-if="notification.id === 4">-->
         <v-card>
           <v-card-header>
             <v-card-header-text>
@@ -31,15 +28,16 @@
 
           <v-card-actions>
             <v-spacer/>
-            <v-btn v-if="notification_userStore.isDeleting !== notification.id"
-                   color="grey" icon="mdi-archive-arrow-up" @click.prevent="notificationStore.archive(notification_user.id)"></v-btn>
+            <v-btn v-if="notification_userStore.isDeleting !== notification.notification_userId"
+                   color="grey" icon="mdi-archive-arrow-up"
+                   @click.prevent="notication_userStore.archive(notification.notification_userId)">
+            </v-btn>
             <v-progress-circular v-else color="red" indeterminate></v-progress-circular>
           </v-card-actions>
-
         </v-card>
-<!--        </div>-->
-      </v-alert>
 
+      </v-alert>
+    </div>
   </div>
 </template>
 
@@ -98,10 +96,13 @@ export default {
               ){
             j++;
           }
-          notifications.push(this.notificationStore.notifications[j]);
+          let pom = this.notificationStore.notifications[j];
+          let pom2 = this.notification_userStore.notification_users[i];
+          let notification = {id: pom.id, name: pom.name, text: pom.text, type: pom.type,
+            notification_userId: pom2.notification_id, archive: pom2.archive};
+          notifications.push(notification);
           j = 0;
         }
-
       }
 
       return notifications;

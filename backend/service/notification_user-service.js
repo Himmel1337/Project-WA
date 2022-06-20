@@ -4,10 +4,8 @@ class Notification_userService {
 
     async getAll(order = "id") {
 
-        let orderByColumn = order === "notification_id" ? "notification_id" : "id";
-
         return await database().all(
-            "SELECT * FROM notification_user ORDER BY " + orderByColumn
+            "SELECT * FROM notification_user ORDER BY id DESC"
         );
     }
 
@@ -17,7 +15,8 @@ class Notification_userService {
             id
         );
     }
-    
+
+
 
     async create(notification_user) {
         const result = await database().run(
@@ -29,8 +28,8 @@ class Notification_userService {
 
     async update(id, notification_user) {
         const result = await database().run(
-            "UPDATE notification_user SET archive = ?, notification_id = ?, user_id = ? WHERE id = ?",
-            notification_user.archive, notification_user.notification_id, notification_user.user_id, id
+            "UPDATE notification_user SET archive = ? WHERE id = ?",
+            notification_user.archive,  id
         );
 
         if (result.changes === 0) {

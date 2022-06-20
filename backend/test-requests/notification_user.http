@@ -62,15 +62,13 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Inhwa
 <> 2022-02-21T144507.500.html
 <> 2022-02-21T144436.500.html
 
-### Update existing notification_user
+### Archive existing notification_user
 
-PUT http://localhost:3000/notification_user/1
+PUT http://localhost:3000/notification_user/33
 Content-Type: application/json
 
 {
-  "archive": 1,
-  "notification_id": 1,
-  "user_id": 1
+  "archive": 0
 }
 
 <> 2022-02-21T150556.202.json

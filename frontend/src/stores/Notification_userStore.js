@@ -46,7 +46,7 @@ export const useNotification_userStore = defineStore('notification_user', {
         async addNotification_user(notification_id, user_id) {
             try {
                 this.isLoading = true;
-                const archive = 1;
+                const archive = 0;
                 const data = {archive, notification_id, user_id};
                 await axios.post(config.backendUrl + '/notification_user', data);
                 this.notification_users.push(notification_user);
@@ -54,6 +54,19 @@ export const useNotification_userStore = defineStore('notification_user', {
                 this.isLoading = false;
             } catch {
                 this.error = 'Cannot add User to Reservation';
+            }
+        },
+
+        async archive(id){
+            try {
+                this.isLoading = true;
+                const notifacation_user = {archive: 1, notification_id: null, user_id: null}
+                await axios.put(`${config.backendUrl}/notification_user/${id}`, notifacation_user);
+                this.isLoading = false;
+
+            } catch {
+                this.success = null;
+                this.error = 'Cannot archive notification!';
             }
         },
 

@@ -43,9 +43,7 @@ router.put('/:id', async (req, res) => {
 
     if (
         isNaN(id) ||
-        isNaN(data.archive) ||
-        isNaN(data.notification_id) ||
-        isNaN(data.user_id)
+        isNaN(data.archive) 
     ) {
         res.status(400).send("Bad input");
         return;
