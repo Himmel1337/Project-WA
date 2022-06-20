@@ -25,6 +25,7 @@ export const useUserStore = defineStore('user', {
   getters: {
     isAuthenticated: state => state.token !== null,
     user: state => jwtDecode(state.token),
+    getById: state => id => state.users.find(a => a.id === id),
   },
 
   actions: {
@@ -40,6 +41,7 @@ export const useUserStore = defineStore('user', {
         this.token = response.data.token;
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.token;
         localStorage.setItem('token', this.token);
+        localStorage.setItem('username', username);
 
         this.loginMessage = null;
         this.isLoggingIn = false;
@@ -105,6 +107,15 @@ export const useUserStore = defineStore('user', {
       }
     },
 
+    addOrUpdateInStore(id, user) {
+      const index = this.users.findIndex(a => a.id === id);
+      if (index !== -1) {
+        this.users[index] = user;
+      } else {
+        this.users.push(user);
+      }
+    },
+
     async loadById(id) {
       try {
         this.isLoading = true;
@@ -114,7 +125,7 @@ export const useUserStore = defineStore('user', {
         this.isLoading = false;
 
       } catch {
-        this.error = 'Cannot download user!';
+        this.error = 'Cannot download users!';
       }
     },
   }

@@ -13,6 +13,13 @@ class UserService {
         );
     }
 
+    async getById(id) {
+        return await database().get(
+            "SELECT id, username, role FROM users WHERE id = ?",
+            id
+        );
+    }
+
     
     async getByUser(username, password) {
         return await database().get(

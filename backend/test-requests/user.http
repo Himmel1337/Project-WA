@@ -46,7 +46,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Inhwa
 
 ### Fetch Existing user
 
-GET http://localhost:3000/user/1
+GET http://localhost:3000/users/4
 Accept: application/json
 
 <> 2022-02-21T143810.200.json

@@ -61,7 +61,7 @@ export default {
       await this.userStore.login(this.username, this.password)
 
       if (!this.userStore.error) {
-        this.$router.push(this.userStore.afterLoginRoute ?? {name: 'reservations'})
+        this.$router.push(this.userStore.afterLoginRoute ?? {name: 'notification'})
         this.userStore.setAfterLoginRoute(null)
       }
     },
