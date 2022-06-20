@@ -25,10 +25,11 @@
 
           <v-card-actions>
             <v-spacer/>
-            <v-btn v-if="flightStore.isDeleting !== user.id" color="grey" icon="mdi-delete"
-                   @click.prevent="reservation_userStore.delete(user.id)"></v-btn>
+            <v-btn v-if="reservationStore.isDeleting !== user.id" color="grey" icon="mdi-delete"
+                   @click="deleteFromUserId(reservation.id, user.id, reservation.name)"></v-btn>
             <v-progress-circular v-else color="red" indeterminate></v-progress-circular>
           </v-card-actions>
+
         </v-card>
       </v-col>
     </v-row>
@@ -41,6 +42,8 @@ import {useReservationStore} from "../stores/ReservationStore";
 import {useFlightStore} from "../stores/FlightStore";
 import {useUserStore} from "../stores/UserStore"
 import {useReservation_userStore} from "../stores/Reservation_userStore";
+import {useNotificationStore} from "../stores/NotificationStore";
+import {useNotification_userStore} from "../stores/Notification_userStore";
 import Error from "../components/Error.vue"
 
 export default {
@@ -61,10 +64,11 @@ export default {
     this.flightStore.loadAll();
     this.userStore.loadAll();
     this.reservation_userStore.loadAll();
+    this.notificationStore.loadAll();
   },
 
   computed: {
-    ...mapStores(useReservationStore, useFlightStore, useUserStore, useReservation_userStore),
+    ...mapStores(useReservationStore, useFlightStore, useUserStore, useReservation_userStore, useNotificationStore, useNotification_userStore),
 
     id() {
       return parseInt(this.$route.params.id);
@@ -80,27 +84,54 @@ export default {
       return this.flightStore.getById(reservation.flight_id);
     },
 
-    users_username(){
+    users_username() {
       let reservation_id = parseInt(this.$route.params.id);
       let users_id = [];
       let n = this.reservation_userStore.reservation_users.length
-      for (let i = 0; i < n; i++){
-        if(this.reservation_userStore.reservation_users[i].reservation_id === reservation_id){
+
+      for (let i = 0; i < n; i++) {
+        if (this.reservation_userStore.reservation_users[i].reservation_id === reservation_id) {
           users_id.push(this.reservation_userStore.reservation_users[i]);
         }
       }
 
-
+      n = users_id.length;
       let users_username = [];
 
-      for(let i = 0; i < n; i++){
-        if(users_id[i].user_id === this.userStore.users[i].id){
-          users_username.push(this.userStore.users[i]);
-          users_username[i].id = users_id[i].id
+      for (let i = 0; i < n; i++) {
+        for (let j = 0; j < 4; j++) {
+          if (users_id[i].user_id === this.userStore.users[j].id) {
+            users_username.push(this.userStore.users[j]);
+          }
         }
       }
 
       return users_username;
+    },
+  },
+
+  methods: {
+    async deleteFromUserId (reservationId, userId, name){
+      let i = 0;
+
+      while (this.reservation_userStore.reservation_users[i].reservation_id != reservationId &&
+          this.reservation_userStore.reservation_users[i].user_id != userId &&
+          i < this.reservation_userStore.reservation_users.length
+          ) {
+        i++
+      }
+
+      let user_reservationId = this.reservation_userStore.reservation_users[i].id;
+
+      await this.notificationStore.addNotification("Change Reservation: " + name,
+          " You were removed from the reservation ", "warning");
+
+      let lastIdNotification = this.notificationStore.notifications[0].id + 1;
+      if(lastIdNotification < 1) lastIdNotification = 1;
+
+      this.reservation_userStore.delete(user_reservationId);
+
+      await this.notification_userStore.addNotification_user(lastIdNotification, userId);
     }
   }
 }
