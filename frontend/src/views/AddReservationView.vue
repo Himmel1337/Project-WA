@@ -109,6 +109,7 @@ export default {
       this.$router.push({name: 'reservations'});
       this.userMenuShown = false;
     },
+
   }
 };
 

@@ -5,6 +5,10 @@
 
   <div v-if="flightStore.isloading">create flight ...</div>
   <div v-else>
+    <div v-if="getRole() != 'technician'">
+      <v-alert type="warning">You dont have rules </v-alert>
+    </div>
+    <div v-else>
     <v-form v-model="form" lazy-validation ref="form">
       <v-text-field
           v-model="name"
@@ -31,6 +35,7 @@
       ></v-text-field>
       <v-btn @click="addFlight()" color="green">Create</v-btn>
     </v-form>
+  </div>
   </div>
 </template>
 
@@ -81,7 +86,6 @@ export default {
 
   computed: {
     ...mapStores(useFlightStore, useNotificationStore, useUserStore, useNotification_userStore),
-
   },
 
   methods: {
@@ -101,6 +105,10 @@ export default {
       for (let i = 0; i < n; i++){
         await this.notification_userStore.addNotification_user(lastIdNotification, this.userStore.users[i].id);
       }
+    },
+
+    getRole() {
+      return localStorage.getItem('logedUserRole');
     },
   }
 }

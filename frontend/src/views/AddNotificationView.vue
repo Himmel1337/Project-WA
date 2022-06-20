@@ -1,9 +1,12 @@
 <template>
   <error v-if="notificationStore.error" :text="notificationStore.error" @hide="notificationStore.clearError()"></error>
   <success v-if="notificationStore.success" :text="notificationStore.success" @hide="notificationStore.clearSuccess()"></success>
-
   <div v-if="notificationStore.isloading">Create notification ...</div>
   <div v-else>
+    <div v-if="getRole() === 'client'">
+      <v-alert type="warning">You dont have rules </v-alert>
+    </div>
+    <div v-else>
     <v-form v-model="form" lazy-validation ref="form">
       <v-text-field
           v-model="name"
@@ -29,6 +32,7 @@
       ></v-combobox>
       <v-btn @click="addUserToNotification()" color="green">Create</v-btn>
     </v-form>
+  </div>
   </div>
 </template>
 
@@ -106,6 +110,10 @@ export default {
 
       this.$router.push({name: 'notification'});
       this.userMenuShown = false;
+    },
+
+    getRole() {
+      return localStorage.getItem('logedUserRole');
     },
   }
 };

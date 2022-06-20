@@ -67,7 +67,6 @@ export const useFlightStore = defineStore('flight', {
 
                 const index = this.flights.findIndex(a => a.id === id);
                 this.flights.splice(index, 1);
-
                 this.error = null;
                 this.isDeleting = false;
 
@@ -76,19 +75,7 @@ export const useFlightStore = defineStore('flight', {
             }
         },
 
-        async changeFlight(id, flight){
-            try {
-                this.isLoading = true;
-                this.error = null;
-                this.success = "Change flight";
-                await axios.put(`${config.backendUrl}/flights/${id}`, flight);
-                this.isLoading = false;
 
-            } catch {
-                this.success = null;
-                this.error = 'Cannot change flight!';
-            }
-        },
 
         addOrUpdateInStore(id, flight) {
             const index = this.flights.findIndex(a => a.id === id);
