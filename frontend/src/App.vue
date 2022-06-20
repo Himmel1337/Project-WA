@@ -7,6 +7,7 @@
       </v-app-bar-title>
 
       <v-btn :to="{name: 'home'}">Homepage</v-btn>
+
       <v-btn :to="{name: 'reservations'}">Reservations</v-btn>
       <v-btn :to="{name: 'flights'}">Flights</v-btn>
       <v-btn :to="{name: 'notification'}">Notification</v-btn>

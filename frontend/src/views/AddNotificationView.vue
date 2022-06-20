@@ -38,9 +38,9 @@
 
 import {mapStores} from "pinia/dist/pinia";
 import {useNotificationStore} from "../stores/NotificationStore";
-import Error from "../components/Error.vue";
 import {useUserStore} from "../stores/UserStore";
 import {useNotification_userStore} from "../stores/Notification_userStore";
+import Error from "../components/Error.vue";
 import Success from "../components/Success.vue";
 
 export default {

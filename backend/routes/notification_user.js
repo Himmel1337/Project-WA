@@ -24,6 +24,7 @@ router.post('/', async (req, res) => {
     console.log(req.notification_user);
 
     if (
+        isNaN(data.archive) ||
         isNaN(data.notification_id) ||
         isNaN(data.user_id)
     ) {
@@ -42,6 +43,7 @@ router.put('/:id', async (req, res) => {
 
     if (
         isNaN(id) ||
+        isNaN(data.archive) ||
         isNaN(data.notification_id) ||
         isNaN(data.user_id)
     ) {

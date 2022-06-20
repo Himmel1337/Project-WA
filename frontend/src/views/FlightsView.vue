@@ -2,7 +2,9 @@
   <h1 class="d-flex align-center mb-4">
     Flights
     <v-spacer/>
+    <div v-if="getRole() === 'technician'">
     <v-btn @click="addFlight()" color="red" >+ Add</v-btn>
+    </div>
   </h1>
 
   <error v-if="flightStore.error" :text="flightStore.error" @hide="flightStore.clearError()"></error>
@@ -33,16 +35,18 @@
           </v-card-text>
 
           <v-card-text>
-            Capacity: {{ flight.capacity }}
+            Capacity: {{ flight.capacity }}, Free Places: {{ flight.free_places }}
           </v-card-text>
 
 
+          <div v-if="getRole() === 'technician'">
           <v-card-actions>
             <v-btn color="primary" :to="{name: 'flight-detail', params: {id: flight.id}}">Change</v-btn>
             <v-spacer/>
             <v-btn v-if="flightStore.isDeleting !== flight.id" color="grey" icon="mdi-delete" @click.prevent="flightStore.delete(flight.id)"></v-btn>
             <v-progress-circular v-else color="red" indeterminate></v-progress-circular>
           </v-card-actions>
+          </div>
         </v-card>
       </v-col>
     </v-row>
@@ -78,6 +82,10 @@ export default {
     addFlight() {
       this.$router.push({name: 'addFlight'});
       this.userMenuShown = false;
+    },
+
+    getRole() {
+      return localStorage.getItem('logedUserRole');
     },
   }
 }

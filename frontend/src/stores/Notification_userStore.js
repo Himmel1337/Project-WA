@@ -46,7 +46,8 @@ export const useNotification_userStore = defineStore('notification_user', {
         async addNotification_user(notification_id, user_id) {
             try {
                 this.isLoading = true;
-                const data = {notification_id, user_id};
+                const archive = 1;
+                const data = {archive, notification_id, user_id};
                 await axios.post(config.backendUrl + '/notification_user', data);
                 this.notification_users.push(notification_user);
                 this.error = null;

@@ -38,6 +38,9 @@
 
 import {mapStores} from "pinia/dist/pinia";
 import {useFlightStore} from "../stores/FlightStore";
+import {useUserStore} from "../stores/UserStore";
+import {useNotificationStore} from "../stores/NotificationStore";
+import {useNotification_userStore} from "../stores/Notification_userStore";
 import Error from "../components/Error.vue";
 import Success from "../components/Success.vue";
 
@@ -70,8 +73,15 @@ export default {
     }
   },
 
+
+  created() {
+    this.notificationStore.loadAll();
+    this.userStore.loadAll();
+  },
+
   computed: {
-    ...mapStores(useFlightStore),
+    ...mapStores(useFlightStore, useNotificationStore, useUserStore, useNotification_userStore),
+
   },
 
   methods: {
@@ -80,8 +90,17 @@ export default {
       await this.$refs.form.validate();
       if (!this.formValid) return;
       await this.flightStore.addFlight(this.name, this.capacity, this.date, this.time);
-      this.$router.push({name: 'flights'});
-      this.userMenuShown = false;
+
+      await this.notificationStore.addNotification("New flight: " + this.name, " Capacity: "
+          + this.capacity + " date: " + this.date + " Time: " + this.time, "success");
+
+      let lastIdNotification = this.notificationStore.notifications[0].id + 1;
+      if(lastIdNotification < 1) lastIdNotification = 1;
+
+      const n = this.userStore.users.length;
+      for (let i = 0; i < n; i++){
+        await this.notification_userStore.addNotification_user(lastIdNotification, this.userStore.users[i].id);
+      }
     },
   }
 }

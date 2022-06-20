@@ -76,6 +76,7 @@ export default {
       if (!this.formValid) return;
       await this.flightStore.changeFlight(this.id, this.flight);
     },
+
   }
 }
 </script>

@@ -2,34 +2,44 @@
   <h1 class="d-flex align-center mb-4">
     Notification
     <v-spacer/>
+    <div v-if="getRole() === 'secretary' || getRole() === 'technician'">
     <v-btn @click="addNotification()" color="red" >+ Add</v-btn>
+    </div>
   </h1>
+
+
 
   <error v-if="notificationStore.error" :text="notificationStore.error" @hide="notificationStore.clearError()"></error>
   <v-progress-circular v-if="notificationStore.isLoading" color="primary" indeterminate size="100" width="10" class="ma-5"/>
   <div v-else-if="notificationStore.notifications.length === 0">No notifications.</div>
   <div v-else>
+   <p>  </p>
+      <v-alert v-for="notification in notifications()" :type="notification.type"
+               class="mb-5" closable>
 
-      <v-alert v-for="notification in notifications()" :type="notification.type" class="mb-5">
+<!--        <div v-if="notification.id === 4">-->
         <v-card>
           <v-card-header>
             <v-card-header-text>
               <v-card-title>
                 {{ notification.name }}: {{ notification.text }}
+
               </v-card-title>
             </v-card-header-text>
           </v-card-header>
 
 
-<!--          <v-card-actions>-->
-<!--            <v-btn color="primary" :to="{name: 'notification-detail', params: {id: notification.id}}">Change</v-btn>-->
-<!--            <v-spacer/>-->
-<!--            <v-btn v-if="notificationStore.isDeleting !== notification.id"-->
-<!--                   color="grey" icon="mdi-delete" @click.prevent="notificationStore.delete(notification.id)"></v-btn>-->
-<!--            <v-progress-circular v-else color="red" indeterminate></v-progress-circular>-->
-<!--          </v-card-actions>-->
+          <v-card-actions>
+            <v-spacer/>
+            <v-btn v-if="notification_userStore.isDeleting !== notification.id"
+                   color="grey" icon="mdi-archive-arrow-up" @click.prevent="notificationStore.archive(notification_user.id)"></v-btn>
+            <v-progress-circular v-else color="red" indeterminate></v-progress-circular>
+          </v-card-actions>
+
         </v-card>
+<!--        </div>-->
       </v-alert>
+
   </div>
 </template>
 
@@ -95,6 +105,10 @@ export default {
       }
 
       return notifications;
+    },
+
+    getRole() {
+      return localStorage.getItem('logedUserRole');
     },
 
     addNotification() {

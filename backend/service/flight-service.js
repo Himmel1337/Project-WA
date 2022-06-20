@@ -20,16 +20,16 @@ class FlightService {
 
     async create(flight) {
         const result = await database().run(
-            "INSERT INTO flights (name, capacity, date, time) VALUES (?, ?, ?, ?)",
-            flight.name, flight.capacity, flight.date, flight.time
+            "INSERT INTO flights (name, capacity, free_places, date, time) VALUES (?, ?, ?, ?, ?)",
+            flight.name, flight.capacity, flight.free_places, flight.date, flight.time
         );
         return await this.getById(result.lastID);
     }
 
     async update(id, flight) {
         const result = await database().run(
-            "UPDATE flights SET name = ?, capacity = ?, date = ?, time = ? WHERE id = ?",
-            flight.name, flight.capacity, flight.date, flight.time, id
+            "UPDATE flights SET name = ?, capacity = ?, free_places = ?, date = ?, time = ? WHERE id = ?",
+            flight.name, flight.capacity, flight.free_places, flight.date, flight.time, id
         );
 
         if (result.changes === 0) {
