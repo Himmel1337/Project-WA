@@ -38,6 +38,8 @@ import Error from "../components/Error.vue";
 import {useFlightStore} from "../stores/FlightStore";
 import {useUserStore} from "../stores/UserStore";
 import {useReservation_userStore} from "../stores/Reservation_userStore";
+import {useNotificationStore} from "../stores/NotificationStore";
+import {useNotification_userStore} from "../stores/Notification_userStore";
 import Success from "../components/Success.vue";
 
 export default {
@@ -66,10 +68,12 @@ export default {
     this.reservationStore.loadAll();
     this.flightStore.loadAll();
     this.userStore.loadAll();
+    this.notificationStore.loadAll();
   },
 
   computed: {
-    ...mapStores(useReservationStore, useFlightStore, useUserStore, useReservation_userStore),
+    ...mapStores(useReservationStore, useReservation_userStore,
+        useFlightStore, useNotificationStore, useUserStore, useNotification_userStore),
   },
 
   methods: {
@@ -106,10 +110,18 @@ export default {
         await this.reservation_userStore.addReservation_user(lastId, this.usersId[i]);
       }
 
-      this.$router.push({name: 'reservations'});
-      this.userMenuShown = false;
-    },
 
+      await this.notificationStore.addNotification("New reservation: " + this.name,
+          " You were adding up to the reservation ", "success");
+
+      let lastIdNotification = this.notificationStore.notifications[0].id + 1;
+      if(lastIdNotification < 1) lastIdNotification = 1;
+
+
+      for (let i = 0; i < n; i++){
+        await this.notification_userStore.addNotification_user(lastIdNotification, this.usersId[i]);
+      }
+    },
   }
 };
 
