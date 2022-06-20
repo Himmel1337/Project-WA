@@ -9,7 +9,6 @@ export const useReservationStore = defineStore('reservation', {
     isAdding: true,
     isDeleting: false,
     error: null,
-    success: null,
   }),
 
   getters: {
@@ -47,12 +46,9 @@ export const useReservationStore = defineStore('reservation', {
       try {
         this.isLoading = true;
         const data = {name, flight_id};
-        this.success = "Create reservation";
-        this.error = null;
         await axios.post(config.backendUrl + '/reservations', data);
         this.isLoading = false;
       } catch {
-        this.success = null;
         this.error = 'Cannot create reservation!';
       }
     },

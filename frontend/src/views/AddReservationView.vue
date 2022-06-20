@@ -31,6 +31,16 @@
     </v-form>
   </div>
   </div>
+  <p>Users: </p>
+  <p v-for="user in arrayUsers()">
+    {{ user.id }} :
+    {{ user.username }}
+  </p>
+  <p>Flight: </p>
+  <p v-for="flight in arrayFlights()">
+    {{ flight.id }} :
+    {{ flight.name }}
+  </p>
 </template>
 
 <script>
@@ -83,37 +93,21 @@ export default {
 
   methods: {
 
-    arrayFlightsId() {
-      let arrayFlightId = [];
-      const n = this.flightStore.flights.length;
-      for (let i = 0; i < n; i++){
-        arrayFlightId.push(this.flightStore.flights[i].id);
-      }
-      return arrayFlightId;
-    },
-
-    arrayUsersId() {
-      let arrayUsersId = [];
-      const n = this.userStore.users.length;
-
-      for (let i = 0; i < n; i++){
-        arrayUsersId.push(this.userStore.users[i].id);
-      }
-
-      return arrayUsersId;
-    },
-
-    async addUserToReservation(name, flight_id, usersId) {
+    async addUserToReservation() {
 
       let lastId = this.reservationStore.reservations[(this.reservationStore.reservations.length) - 1].id + 1;
       if (lastId < 1) lastId = 1;
       await this.$refs.form.validate();
       if (!this.formValid) return;
+
       await this.reservationStore.addReservation(this.name, this.flight_id);
       const n = this.usersId.length;
       for (let i = 0; i < n; i++){
         await this.reservation_userStore.addReservation_user(lastId, this.usersId[i]);
       }
+
+      this.$router.push({name: 'reservations'});
+      this.userMenuShown = false;
 
 
       await this.notificationStore.addNotification("New reservation: " + this.name,
@@ -126,7 +120,6 @@ export default {
       while (i <  this.flightStore.flights.length && this.flightStore.flights[i].id
       != this.flight_id){
         i++;
-        console.log(i);
       }
 
       let pomFlight = this.flightStore.flights[i];
@@ -137,6 +130,51 @@ export default {
       for (let i = 0; i < n; i++){
         await this.notification_userStore.addNotification_user(lastIdNotification, this.usersId[i]);
       }
+
+    },
+
+
+
+    arrayFlightsId() {
+      let arrayFlightId = [];
+      const n = this.flightStore.flights.length;
+      for (let i = 0; i < n; i++){
+        arrayFlightId.push(this.flightStore.flights[i].id);
+      }
+      return arrayFlightId;
+    },
+
+    arrayFlights() {
+      let arrayFlights = [];
+      const n = this.flightStore.flights.length;
+
+      for (let i = 0; i < n; i++){
+        arrayFlights.push(this.flightStore.flights[i]);
+      }
+
+      return arrayFlights;
+    },
+
+    arrayUsersId() {
+      let arrayUsersId = [];
+      const n = this.userStore.users.length;
+
+      for (let i = 2; i < n; i++){
+        arrayUsersId.push(this.userStore.users[i].id);
+      }
+
+      return arrayUsersId;
+    },
+
+    arrayUsers() {
+      let arrayUsers = [];
+      const n = this.userStore.users.length;
+
+      for (let i = 2; i < n; i++){
+        arrayUsers.push(this.userStore.users[i]);
+      }
+
+      return arrayUsers;
     },
 
     getRole() {

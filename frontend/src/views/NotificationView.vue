@@ -33,7 +33,7 @@
             <v-spacer/>
             <v-btn v-if="notification_userStore.isArchive !== notification.notification_userId"
                    color="grey" icon="mdi-archive-arrow-up"
-                   @click.prevent="notification_userStore.archive(notification.notification_userId)">
+                   @click.prevent="archive(notification.notification_userId)">
             </v-btn>
             <v-progress-circular v-else color="red" indeterminate></v-progress-circular>
           </v-card-actions>
@@ -117,6 +117,12 @@ export default {
 
     addNotification() {
       this.$router.push({name: 'addNotification'});
+      this.userMenuShown = false;
+    },
+
+    archive(id){
+      this.notification_userStore.archive(id);
+      this.$router.push({name: 'archiveNotification'});
       this.userMenuShown = false;
     },
 

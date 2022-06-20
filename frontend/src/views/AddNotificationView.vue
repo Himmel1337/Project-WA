@@ -35,6 +35,11 @@
     </v-form>
   </div>
   </div>
+  <p>Users: </p>
+  <p v-for="user in arrayUsers()">
+    {{ user.id }} :
+    {{ user.username }}
+  </p>
 </template>
 
 <script>
@@ -89,6 +94,17 @@ export default {
       }
 
       return arrayUsersId;
+    },
+
+    arrayUsers() {
+      let arrayUsers = [];
+      const n = this.userStore.users.length;
+
+      for (let i = 2; i < n; i++){
+        arrayUsers.push(this.userStore.users[i]);
+      }
+
+      return arrayUsers;
     },
 
     async addUserToNotification(name, text, type, usersId) {

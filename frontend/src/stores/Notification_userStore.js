@@ -60,13 +60,14 @@ export const useNotification_userStore = defineStore('notification_user', {
 
         async archive(id){
             try {
-                this.isArcive = id;
+                this.isDeleting = id;
 
                 const notifacation_user = {archive: 1, notification_id: null, user_id: null}
                 await axios.put(`${config.backendUrl}/notification_user/${id}`, notifacation_user);
 
                 this.error = null;
-                this.isArcive = false;
+                this.isDeleting  = false;
+
 
             } catch {
                 this.success = null;

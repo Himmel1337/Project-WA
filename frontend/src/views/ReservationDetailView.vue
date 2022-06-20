@@ -27,7 +27,7 @@
           <v-card-actions>
             <v-spacer/>
             <v-btn v-if="reservationStore.isDeleting !== user.id" color="grey" icon="mdi-delete"
-                   @click="deleteFromUserId(reservation.id, user.id, reservation.name)"></v-btn>
+                   @click="deleteFromUserId(reservation.id, user.id, reservation.name, flight.id)"></v-btn>
             <v-progress-circular v-else color="red" indeterminate></v-progress-circular>
           </v-card-actions>
 
@@ -43,9 +43,14 @@
           label="Users"
           multiple
       ></v-combobox>
-      <v-btn @click="addUserToReservation(reservation.name, reservation.id)" color="green">Add users</v-btn>
+      <v-btn @click="addUserToReservation(reservation.name, reservation.id, flight.id)" color="green">Add users</v-btn>
     </v-form>
   </div>
+  <p>Users: </p>
+  <p v-for="user in arrayUsers()">
+    {{ user.id }} :
+    {{ user.username }}
+  </p>
 </template>
 
 <script>
@@ -113,7 +118,7 @@ export default {
       let users_username = [];
 
       for (let i = 0; i < n; i++) {
-        for (let j = 0; j < 4; j++) {
+        for (let j = 0; j < this.userStore.users.length; j++) {
           if (users_id[i].user_id === this.userStore.users[j].id) {
             users_username.push(this.userStore.users[j]);
           }
@@ -126,40 +131,51 @@ export default {
 
   methods: {
 
-    arrayUsersId() {
-      let arrayUsersId = [];
-      const n = this.userStore.users.length;
 
-      for (let i = 0; i < n; i++){
-        arrayUsersId.push(this.userStore.users[i].id);
-      }
-
-      return arrayUsersId;
-    },
-
-    async addUserToReservation(reservation_name, reservation_id) {
+    async addUserToReservation(reservation_name, reservation_id, flight_id) {
 
       await this.$refs.form.validate();
       if (!this.formValid) return;
 
-      const n = this.usersId.length;
-      for (let i = 0; i < n; i++){
-        await this.reservation_userStore.addReservation_user(reservation_id, this.usersId[i]);
+      let i = 0;
+      while (i <  this.flightStore.flights.length && this.flightStore.flights[i].id
+      != flight_id){
+        i++;
       }
 
-      await this.notificationStore.addNotification("Change reservation: " + reservation_name,
-          " You were adding up to the reservation ", "info");
+      let pomFlight = this.flightStore.flights[i];
+      pomFlight.free_places -= this.usersId.length;
 
-      let lastIdNotification = this.notificationStore.notifications[0].id + 1;
-      if(lastIdNotification < 1) lastIdNotification = 1;
+      if(pomFlight.free_places < 0){
+        this.$router.push({name: 'reservations'});
+        this.userMenuShown = false;
+        return;
+      } else {
+        this.flightStore.changeFlight(pomFlight.id, pomFlight)
+        const n = this.usersId.length;
+        for (let i = 0; i < n; i++){
+          await this.reservation_userStore.addReservation_user(reservation_id, this.usersId[i]);
+        }
+
+        this.$router.push({name: 'reservations'});
+        this.userMenuShown = false;
+
+        await this.notificationStore.addNotification("Change reservation: " + reservation_name,
+            " You were adding up to the reservation ", "info");
+
+        let lastIdNotification = this.notificationStore.notifications[0].id + 1;
+        if(lastIdNotification < 1) lastIdNotification = 1;
 
 
-      for (let i = 0; i < n; i++){
-        await this.notification_userStore.addNotification_user(lastIdNotification, this.usersId[i]);
+
+
+        for (let i = 0; i < n; i++){
+          await this.notification_userStore.addNotification_user(lastIdNotification, this.usersId[i]);
+        }
       }
     },
 
-    async deleteFromUserId (reservationId, userId, name){
+    async deleteFromUserId (reservationId, userId, name, flight_id){
       let i = 0;
 
       while (this.reservation_userStore.reservation_users[i].reservation_id != reservationId &&
@@ -177,9 +193,41 @@ export default {
       let lastIdNotification = this.notificationStore.notifications[0].id + 1;
       if(lastIdNotification < 1) lastIdNotification = 1;
 
+      i = 0;
+      while (i <  this.flightStore.flights.length && this.flightStore.flights[i].id
+      != flight_id){
+        i++;
+      }
+
+      let pomFlight = this.flightStore.flights[i];
+      pomFlight.free_places += 1;
+      this.flightStore.changeFlight(pomFlight.id, pomFlight)
+
       this.reservation_userStore.delete(user_reservationId);
 
       await this.notification_userStore.addNotification_user(lastIdNotification, userId);
+    },
+
+    arrayUsersId() {
+      let arrayUsersId = [];
+      const n = this.userStore.users.length;
+
+      for (let i = 2; i < n; i++){
+        arrayUsersId.push(this.userStore.users[i].id);
+      }
+
+      return arrayUsersId;
+    },
+
+    arrayUsers() {
+      let arrayUsers = [];
+      const n = this.userStore.users.length;
+
+      for (let i = 2; i < n; i++){
+        arrayUsers.push(this.userStore.users[i]);
+      }
+
+      return arrayUsers;
     },
 
     getRole() {
