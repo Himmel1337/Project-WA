@@ -117,10 +117,25 @@ export default {
       let lastIdNotification = this.notificationStore.notifications[0].id + 1;
       if(lastIdNotification < 1) lastIdNotification = 1;
 
+      let i = 0;
+      while (i <  this.flightStore.flights.length && this.flightStore.flights[i].id
+      != this.flight_id){
+        i++;
+        console.log(i);
+      }
+
+      let pomFlight = this.flightStore.flights[i];
+      pomFlight.free_places -= n;
+      this.flightStore.changeFlight(pomFlight.id, pomFlight)
+
 
       for (let i = 0; i < n; i++){
         await this.notification_userStore.addNotification_user(lastIdNotification, this.usersId[i]);
       }
+    },
+
+    getRole() {
+      return localStorage.getItem('logedUserRole');
     },
   }
 };

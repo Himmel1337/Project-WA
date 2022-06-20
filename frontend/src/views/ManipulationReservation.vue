@@ -1,13 +1,6 @@
 <template>
   <h1 class="d-flex align-center mb-4">
-    Reservations
-    <v-spacer/>
-    <div v-if="getRole() === 'client'">
-    <v-btn @click="addReservation()" color="red" >+ Add</v-btn>
-    </div>
-    <div v-if="getRole() === 'secretary'">
-    <v-btn @click="manipulationReservation()" color="red" > Manipulation Reservation </v-btn>
-    </div>
+    Manipulation Reservation
   </h1>
 
   <error v-if="reservationStore.error" :text="reservationStore.error" @hide="reservationStore.clearError()"></error>
@@ -16,7 +9,7 @@
   <div v-else-if="reservationStore.reservations.length === 0">No reservations.</div>
   <div v-else>
     <v-row>
-      <v-col cols="4" v-for="reservation in reservations()">
+      <v-col cols="4" v-for="reservation in reservationStore.reservations">
         <v-card>
           <router-link :to="{name: 'reservation-detail', params: {id: reservation.id}}">
             <v-img src="https://static.scientificamerican.com/sciam/assets/Image/INLINE%20IMAGE%204%20-%2048954138962_9813a1461d_o.jpg"></v-img>
@@ -45,7 +38,6 @@
 
 <script>
 import {useReservationStore} from "../stores/ReservationStore";
-import {useReservation_userStore} from "../stores/Reservation_userStore";
 import {mapStores} from "pinia/dist/pinia";
 import Error from "../components/Error.vue"
 import {useFlightStore} from "../stores/FlightStore";
@@ -70,49 +62,15 @@ export default {
     this.flightStore.loadAll()
     this.notificationStore.loadAll();
     this.userStore.loadAll();
-    this.reservation_userStore.loadAll();
   },
 
   computed: {
-    ...mapStores(useReservationStore, useFlightStore, useNotificationStore,
-        useUserStore, useNotification_userStore, useReservation_userStore)
+    ...mapStores(useReservationStore, useFlightStore, useNotificationStore, useUserStore, useNotification_userStore)
   },
 
   methods: {
-
-    reservations(){
-
-
-      const user_id = localStorage.getItem('logedUserId')
-
-      let reservations = [];
-      let j = 0;
-      let n = this.reservation_userStore.reservation_users.length
-      for (let i = 0; i < n; i++){
-        if (this.reservation_userStore.reservation_users[i].user_id == user_id){
-          while (this.reservationStore.reservations[j].id !=
-              this.reservation_userStore.reservation_users[i].reservation_id &&
-              this.reservationStore.reservations.length > j
-              ){
-            j++;
-          }
-
-          reservations.push(this.reservationStore.reservations[j]);
-          j = 0;
-        }
-      }
-
-      return reservations;
-    },
-
-
     addReservation() {
       this.$router.push({name: 'addReservation'});
-      this.userMenuShown = false;
-    },
-
-    manipulationReservation() {
-      this.$router.push({name: 'manipulationReservation'});
       this.userMenuShown = false;
     },
 

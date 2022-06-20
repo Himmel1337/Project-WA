@@ -5,6 +5,7 @@ import AboutView from '../views/AboutView.vue'
 import ReservationsView from '../views/ReservationsView.vue'
 import ReservationDetailView from '../views/ReservationDetailView.vue'
 import AddReservationView from '../views/AddReservationView.vue';
+import ManipulationReservation from "../views/ManipulationReservation.vue";
 
 import FlightsView from '../views/FlightsView.vue'
 import FlightDetailView from '../views/FlightDetailView.vue'
@@ -17,7 +18,7 @@ import {useUserStore} from '../stores/UserStore';
 
 import NotificationView from '../views/NotificationView.vue';
 import AddNotificationView from '../views/AddNotificationView.vue';
-
+import ArchiveNotification from "../views/ArchiveNotification.vue";
 
 
 const router = createRouter({
@@ -61,6 +62,11 @@ const router = createRouter({
           component: AddNotificationView
         },
         {
+          path: 'archiveNotification',
+          name: 'archiveNotification',
+          component: ArchiveNotification
+        },
+        {
           path: 'reservations',
           name: 'reservations',
           component: ReservationsView
@@ -69,6 +75,11 @@ const router = createRouter({
           path: 'reservations/:id',
           name: 'reservation-detail',
           component: ReservationDetailView
+        },
+        {
+          path: 'manipulationReservation',
+          name: 'manipulationReservation',
+          component: ManipulationReservation
         },
         {
           path: 'addReservation',

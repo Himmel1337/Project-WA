@@ -1,13 +1,6 @@
 <template>
   <h1 class="d-flex align-center mb-4">
-    Notification
-    <v-spacer/>
-    <div v-if="getRole() === 'secretary' || getRole() === 'technician'">
-      <v-btn @click="addNotification()" color="red" >+ Add</v-btn>
-    </div>
-    <div>
-      <v-btn @click="archiveNotification()" color="red" > Archive </v-btn>
-    </div>
+    Archive notification
   </h1>
 
   <error v-if="notificationStore.error" :text="notificationStore.error" @hide="notificationStore.clearError()"></error>
@@ -15,8 +8,8 @@
   <div v-else-if="notificationStore.notifications.length === 0">No notifications.</div>
   <div v-else>
     <div v-for="notification in notifications()">
-    <v-alert v-if="notification.archive === 0" :type="notification.type"
-              class="mb-5" closable>
+      <v-alert v-if="notification.archive === 1" :type="notification.type"
+               class="mb-5" closable>
 
         <v-card>
           <v-card-header>
@@ -31,9 +24,9 @@
 
           <v-card-actions>
             <v-spacer/>
-            <v-btn v-if="notification_userStore.isArchive !== notification.notification_userId"
-                   color="grey" icon="mdi-archive-arrow-up"
-                   @click.prevent="notification_userStore.archive(notification.notification_userId)">
+            <v-btn v-if="notification_userStore.isDeleting !== notification.notification_userId"
+                   color="grey" icon="mdi-delete"
+                   @click.prevent="notification_userStore.delete(notification.notification_userId)">
             </v-btn>
             <v-progress-circular v-else color="red" indeterminate></v-progress-circular>
           </v-card-actions>
@@ -79,7 +72,7 @@ export default {
 
       let i = 0;
       while (i < this.userStore.users.length && this.userStore.users[i].username
-          != localStorage.getItem('logedUsername')){
+      != localStorage.getItem('logedUsername')){
         i++;
       }
 
@@ -94,7 +87,7 @@ export default {
       for (let i = 0; i < n; i++){
         if (this.notification_userStore.notification_users[i].user_id === user_id){
           while (this.notificationStore.notifications[j].id !=
-          this.notification_userStore.notification_users[i].notification_id &&
+              this.notification_userStore.notification_users[i].notification_id &&
               this.notificationStore.notifications.length > j
               ){
             j++;
@@ -117,11 +110,6 @@ export default {
 
     addNotification() {
       this.$router.push({name: 'addNotification'});
-      this.userMenuShown = false;
-    },
-
-    archiveNotification() {
-      this.$router.push({name: 'archiveNotification'});
       this.userMenuShown = false;
     },
   }

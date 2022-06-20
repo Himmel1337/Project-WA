@@ -45,12 +45,12 @@ export const useNotificationStore = defineStore('notification', {
 
         async addNotification(name, text, type) {
             try {
-                this.isLoading = true;
+                this.isAdding = true;
                 const data = {name, text, type};
+                await axios.post(config.backendUrl + '/notifications', data);
                 this.success = "Create notification";
                 this.error = null;
-                await axios.post(config.backendUrl + '/notifications', data);
-                this.isLoading = false;
+                this.isAdding = false;
             } catch {
                 this.success = null;
                 this.error = 'Cannot create notification!';

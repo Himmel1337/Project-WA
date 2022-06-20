@@ -3,12 +3,13 @@
 
   <div v-if="reservationStore.isLoading">Loading...</div>
   <div v-else>
-    <h1>reservation {{ reservation.name }}</h1>
+    <h1>Reservation: {{ reservation.name }}</h1>
 
-<!--      {{ flight.name }}-->
-<!--      {{ flight.date }}-->
-<!--      {{ flight.time }}-->
 
+
+          <h2>Flight: {{ flight.name }}</h2>
+          <h3>Date: {{ flight.date }} Time: {{ flight.time }}</h3>
+          <h3>Free Places: {{ flight.capacity }}/{{ flight.free_places }}</h3><br>
 
     <v-row>
       <v-col cols="4" v-for="user in users_username">
@@ -179,7 +180,11 @@ export default {
       this.reservation_userStore.delete(user_reservationId);
 
       await this.notification_userStore.addNotification_user(lastIdNotification, userId);
-    }
+    },
+
+    getRole() {
+      return localStorage.getItem('logedUserRole');
+    },
   }
 }
 </script>

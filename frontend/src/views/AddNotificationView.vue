@@ -108,8 +108,7 @@ export default {
         await this.notification_userStore.addNotification_user(lastId, this.usersId[i]);
       }
 
-      this.$router.push({name: 'notification'});
-      this.userMenuShown = false;
+
     },
 
     getRole() {
