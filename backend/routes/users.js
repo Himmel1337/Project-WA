@@ -77,5 +77,17 @@ router.get('/:id', async (req, res) => {
     }
 })
 
+router.get('/:username', async (req, res) => {
+    const username = parseInt(req.params.username);
+    const user = await userService.getByUsername(username);
+
+    if (user) {
+        res.json(user);
+    } else {
+        res.status(404).send("Not found");
+    }
+})
+
+
 
 module.exports = router;

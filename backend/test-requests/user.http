@@ -55,3 +55,16 @@ Accept: application/json
 <> 2022-02-21T105230.404.html
 <> 2022-02-21T105214.404.html
 <> 2022-02-21T105147.404.html
+
+### Fetch Existing user from usernmae
+
+GET http://localhost:3000/users/xkudla
+Accept: application/json
+
+<> 2022-02-21T143810.200.json
+<> 2022-02-21T105334.200.json
+<> 2022-02-21T105316.404.html
+<> 2022-02-21T105230.404.html
+<> 2022-02-21T105214.404.html
+<> 2022-02-21T105147.404.html
+

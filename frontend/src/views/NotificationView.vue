@@ -68,9 +68,12 @@ export default {
 
       let i = 0;
       while (i < this.userStore.users.length && this.userStore.users[i].username
-          != localStorage.getItem('username')){
+          != localStorage.getItem('logedUsername')){
         i++;
       }
+
+      localStorage.setItem('logedUserId', this.userStore.users[i].id);
+      localStorage.setItem('logedUserRole', this.userStore.users[i].role);
 
       let user_id = this.userStore.users[i].id;
 

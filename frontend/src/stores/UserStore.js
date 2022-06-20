@@ -41,7 +41,7 @@ export const useUserStore = defineStore('user', {
         this.token = response.data.token;
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.token;
         localStorage.setItem('token', this.token);
-        localStorage.setItem('username', username);
+        localStorage.setItem('logedUsername', username);
 
         this.loginMessage = null;
         this.isLoggingIn = false;
