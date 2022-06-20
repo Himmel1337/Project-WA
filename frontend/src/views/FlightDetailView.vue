@@ -75,6 +75,9 @@ export default {
       await this.$refs.form.validate();
       if (!this.formValid) return;
 
+      this.$router.push({name: 'flights'});
+      this.userMenuShown = false;
+
       await this.flightStore.changeFlight(this.id, flight);
 
 
@@ -91,6 +94,8 @@ export default {
       for (let i = 0; i < n; i++){
         await this.notification_userStore.addNotification_user(lastIdNotification, this.userStore.users[i].id);
       }
+
+
     },
 
     getRole() {

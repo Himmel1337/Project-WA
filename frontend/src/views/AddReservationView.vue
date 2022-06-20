@@ -5,6 +5,10 @@
 
   <div v-if="reservationStore.isloading">Create reservation ...</div>
   <div v-else>
+    <div v-if="getRole() === 'technician'">
+      <v-alert type="warning">You dont have rules </v-alert>
+    </div>
+    <div v-else>
     <v-form v-model="form" lazy-validation ref="form">
       <v-text-field
           v-model="name"
@@ -25,6 +29,7 @@
       ></v-combobox>
       <v-btn @click="addUserToReservation()" color="green">Create</v-btn>
     </v-form>
+  </div>
   </div>
 </template>
 

@@ -47,13 +47,12 @@ import {useUserStore} from "../stores/UserStore";
 import {useNotificationStore} from "../stores/NotificationStore";
 import {useNotification_userStore} from "../stores/Notification_userStore";
 import Error from "../components/Error.vue";
-import Success from "../components/Success.vue";
 
 export default {
   name: "AddFlight",
 
   components: {
-    Error, Success,
+    Error
   },
 
   data() {
@@ -90,9 +89,10 @@ export default {
 
   methods: {
     async addFlight(name, capacity, date, time) {
-
       await this.$refs.form.validate();
       if (!this.formValid) return;
+      this.$router.push({name: 'flights'});
+      this.userMenuShown = false;
       await this.flightStore.addFlight(this.name, this.capacity, this.date, this.time);
 
       await this.notificationStore.addNotification("New flight: " + this.name, " Capacity: "
@@ -105,6 +105,8 @@ export default {
       for (let i = 0; i < n; i++){
         await this.notification_userStore.addNotification_user(lastIdNotification, this.userStore.users[i].id);
       }
+
+
     },
 
     getRole() {

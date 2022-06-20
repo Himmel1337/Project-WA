@@ -11,24 +11,25 @@
       <v-text-field
           v-model="name"
           label="Name"
-          :rules="nameRules"
+          :rules="rules"
       ></v-text-field>
       <v-text-field
           v-model="text"
           label="Text"
-          :rules="textRules"
+          :rules="rules"
       ></v-text-field>
       <v-select
           :items="items"
           label="Type"
           v-model="type"
-          :rules="typeRules"
+          :rules="rules"
       ></v-select>
       <v-combobox
           v-model="usersId"
           :items="arrayUsersId()"
           label="Users"
           multiple
+          :rules="rules"
       ></v-combobox>
       <v-btn @click="addUserToNotification()" color="green">Create</v-btn>
     </v-form>
@@ -62,14 +63,8 @@ export default {
       type: '',
       items: ['success', 'info', 'warning'],
       usersId: [],
-      nameRules: [
-        v => !!v || 'Name is required',
-      ],
-      typeRules: [
-        v => !!v || 'Flight is required',
-      ],
-      flightRules: [
-        v => !!v || 'Flight is required',
+      rules: [
+        v => !!v || 'Input is required',
       ],
     }
   },
@@ -98,7 +93,7 @@ export default {
 
     async addUserToNotification(name, text, type, usersId) {
 
-      let  lastId = this.notificationStore.notifications[(this.notificationStore.notifications.length) - 1].id + 1;
+      let  lastId = this.notificationStore.notifications[0].id + 1;
       if (lastId < 1) lastId = 1;
       await this.$refs.form.validate();
       if (!this.formValid) return;

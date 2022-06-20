@@ -78,13 +78,11 @@ export default {
         this.role = 'client';
       }
 
-
       await this.$refs.form.validate();
       if (!this.formValid) return;
       this.$router.push({name: 'login'});
       this.userMenuShown = false;
       await this.userStore.addUser(this.username, this.password, this.role);
-
 
     },
   }

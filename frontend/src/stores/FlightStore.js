@@ -9,7 +9,6 @@ export const useFlightStore = defineStore('flight', {
         isAdding: true,
         isDeleting: false,
         error: null,
-        success: null,
     }),
 
     getters: {
@@ -79,12 +78,10 @@ export const useFlightStore = defineStore('flight', {
             try {
                 this.isLoading = true;
                 this.error = null;
-                this.success = "Change flight";
                 await axios.put(`${config.backendUrl}/flights/${id}`, flight);
                 this.isLoading = false;
 
             } catch {
-                this.success = null;
                 this.error = 'Cannot change flight!';
             }
         },

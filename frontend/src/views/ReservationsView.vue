@@ -15,6 +15,10 @@
   <v-progress-circular v-if="reservationStore.isLoading" color="primary" indeterminate size="100" width="10" class="ma-5"/>
   <div v-else-if="reservationStore.reservations.length === 0">No reservations.</div>
   <div v-else>
+    <div v-if="getRole() === 'technician'">
+      <v-alert type="warning">You dont have rules </v-alert>
+    </div>
+    <div v-else>
     <v-row>
       <v-col cols="4" v-for="reservation in reservations()">
         <v-card>
@@ -40,6 +44,7 @@
         </v-card>
       </v-col>
     </v-row>
+  </div>
   </div>
 </template>
 
