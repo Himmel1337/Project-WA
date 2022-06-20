@@ -101,7 +101,7 @@ export default {
     async addUserToReservation(name, flight_id, usersId) {
 
       let lastId = this.reservationStore.reservations[(this.reservationStore.reservations.length) - 1].id + 1;
-      if (lastId == 0) lastId = 1;
+      if (lastId < 1) lastId = 1;
       await this.$refs.form.validate();
       if (!this.formValid) return;
       await this.reservationStore.addReservation(this.name, this.flight_id);

@@ -3,7 +3,7 @@
     Flights
     <v-spacer/>
     <div v-if="getRole() === 'technician'">
-    <v-btn @click="addFlight()" color="red" >+ Add</v-btn>
+      <v-btn @click="addFlight()" color="red" >+ Add</v-btn>
     </div>
   </h1>
 
@@ -27,11 +27,11 @@
           </v-card-header>
 
           <v-card-text>
-           Date:  {{ flight.date.length > 30 ? flight.date.substr(0, 30) + '...' : flight.date }}
+            Date:  {{ flight.date.length > 30 ? flight.date.substr(0, 30) + '...' : flight.date }}
           </v-card-text>
 
           <v-card-text>
-           Time:  {{ flight.time.length > 30 ? flight.time.substr(0, 30) + '...' : flight.time }}
+            Time:  {{ flight.time.length > 30 ? flight.time.substr(0, 30) + '...' : flight.time }}
           </v-card-text>
 
           <v-card-text>
@@ -64,58 +64,44 @@ import {useReservationStore} from "../stores/ReservationStore";
 import Error from "../components/Error.vue";
 export default {
   name: "Flights",
-
   components: {
     Error,
   },
-
   data() {
     return {
     }
   },
-
   created() {
     this.flightStore.loadAll()
     this.notificationStore.loadAll();
     this.userStore.loadAll();
     this.reservationStore.loadAll();
   },
-
   computed: {
     ...mapStores(useFlightStore, useNotificationStore, useUserStore, useNotification_userStore, useReservationStore)
   },
-
   methods: {
     addFlight() {
       this.$router.push({name: 'addFlight'});
       this.userMenuShown = false;
     },
-
     getRole() {
       return localStorage.getItem('logedUserRole');
     },
-
     async deleteFlight(id, name){
-
       await this.notificationStore.addNotification("Delete flight: " + name, " Flight was removed "
           , "warning");
-
       let lastIdNotification = this.notificationStore.notifications[0].id + 1;
       if(lastIdNotification < 1) lastIdNotification = 1;
-
       const n = this.userStore.users.length;
       for (let i = 0; i < n; i++){
         await this.notification_userStore.addNotification_user(lastIdNotification, this.userStore.users[i].id);
       }
-
       this.flightStore.delete(id);
     }
-
-
   }
 }
 </script>
 
 <style scoped>
-
 </style>
