@@ -12,7 +12,7 @@
       <v-col cols="4" v-for="reservation in reservationStore.reservations">
         <v-card>
           <router-link :to="{name: 'reservation-detail', params: {id: reservation.id}}">
-            <v-img src="https://static.scientificamerican.com/sciam/assets/Image/INLINE%20IMAGE%204%20-%2048954138962_9813a1461d_o.jpg"></v-img>
+            <v-img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeebp-15PyoHz879-3YHynilQhJi6ohS2Pjg&usqp=CAU"></v-img>
           </router-link>
 
           <v-card-header>

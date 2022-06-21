@@ -29,7 +29,6 @@
           :items="arrayUsersId()"
           label="Users"
           multiple
-          :rules="rules"
       ></v-combobox>
       <v-btn @click="addUserToNotification()" color="green">Create</v-btn>
     </v-form>
