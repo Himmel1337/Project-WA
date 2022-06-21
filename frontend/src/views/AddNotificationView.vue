@@ -100,7 +100,7 @@ export default {
       let arrayUsers = [];
       const n = this.userStore.users.length;
 
-      for (let i = 2; i < n; i++){
+      for (let i = 0; i < n; i++){
         arrayUsers.push(this.userStore.users[i]);
       }
 

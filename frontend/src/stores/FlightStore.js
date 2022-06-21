@@ -42,14 +42,13 @@ export const useFlightStore = defineStore('flight', {
             }
         },
 
-        async addFlight(name, capacity, date, time) {
+        async addFlight(name, capacity, date, time, flight_progress) {
             try {
                 this.isLoading = true;
                 const free_places = capacity;
-                const data = {name, capacity, free_places, date, time};
+                const data = {name, capacity, free_places, date, time, flight_progress};
                 await axios.post(config.backendUrl + '/flights', data);
                 this.error = null;
-                this.success = "Created flight";
                 this.isLoading = false;
 
             } catch {

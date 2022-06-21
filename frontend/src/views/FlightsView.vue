@@ -15,7 +15,7 @@
       <v-col cols="4" v-for="flight in flightStore.flights">
         <v-card>
           <router-link :to="{name: 'flight-detail', params: {id: flight.id}}">
-            <v-img src="https://static.scientificamerican.com/sciam/assets/Image/INLINE%20IMAGE%204%20-%2048954138962_9813a1461d_o.jpg"></v-img>
+            <v-img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrDI4R5XseTDepVLnXutV3wcrF1jxWbf43SQ&usqp=CAU"></v-img>
           </router-link>
 
           <v-card-header>
@@ -38,14 +38,17 @@
             Capacity: {{ flight.capacity }}, Free Places: {{ flight.free_places }}
           </v-card-text>
 
+          <v-card-text>
+            Flight progress: {{ flight.flight_progress }}
+          </v-card-text>
 
           <div v-if="getRole() === 'technician'">
             <v-card-actions>
               <v-btn color="primary" :to="{name: 'flight-detail', params: {id: flight.id}}">Change</v-btn>
-              <v-spacer/>
-              <v-btn v-if="flightStore.isDeleting !== flight.id" color="grey" icon="mdi-delete"
-                     @click="deleteFlight(flight.id, flight.name)"></v-btn>
-              <v-progress-circular v-else color="red" indeterminate></v-progress-circular>
+<!--              <v-spacer/>-->
+<!--              <v-btn v-if="flightStore.isDeleting !== flight.id" color="grey" icon="mdi-delete"-->
+<!--                     @click="deleteFlight(flight.id, flight.name)"></v-btn>-->
+<!--              <v-progress-circular v-else color="red" indeterminate></v-progress-circular>-->
             </v-card-actions>
           </div>
         </v-card>
@@ -57,48 +60,50 @@
 <script>
 import {mapStores} from "pinia/dist/pinia";
 import {useFlightStore} from "../stores/FlightStore";
-import {useUserStore} from "../stores/UserStore";
-import {useNotificationStore} from "../stores/NotificationStore";
-import {useNotification_userStore} from "../stores/Notification_userStore";
-import {useReservationStore} from "../stores/ReservationStore";
 import Error from "../components/Error.vue";
 export default {
+
   name: "Flights",
+
   components: {
     Error,
   },
+
   data() {
     return {
     }
   },
+
   created() {
     this.flightStore.loadAll()
-    this.notificationStore.loadAll();
-    this.userStore.loadAll();
-    this.reservationStore.loadAll();
   },
+
   computed: {
-    ...mapStores(useFlightStore, useNotificationStore, useUserStore, useNotification_userStore, useReservationStore)
+    ...mapStores(useFlightStore)
   },
+
   methods: {
+
     addFlight() {
       this.$router.push({name: 'addFlight'});
       this.userMenuShown = false;
     },
+
     getRole() {
       return localStorage.getItem('logedUserRole');
     },
-    async deleteFlight(id, name){
-      await this.notificationStore.addNotification("Delete flight: " + name, " Flight was removed "
-          , "warning");
-      let lastIdNotification = this.notificationStore.notifications[0].id + 1;
-      if(lastIdNotification < 1) lastIdNotification = 1;
-      const n = this.userStore.users.length;
-      for (let i = 0; i < n; i++){
-        await this.notification_userStore.addNotification_user(lastIdNotification, this.userStore.users[i].id);
-      }
-      this.flightStore.delete(id);
-    }
+
+    // async deleteFlight(id, name){
+    //   await this.notificationStore.addNotification("Delete flight: " + name, " Flight was removed "
+    //       , "warning");
+    //   let lastIdNotification = this.notificationStore.notifications[0].id + 1;
+    //   if(lastIdNotification < 1) lastIdNotification = 1;
+    //   const n = this.userStore.users.length;
+    //   for (let i = 0; i < n; i++){
+    //     await this.notification_userStore.addNotification_user(lastIdNotification, this.userStore.users[i].id);
+    //   }
+    //   this.flightStore.delete(id);
+    // }
   }
 }
 </script>

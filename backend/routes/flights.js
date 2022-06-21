@@ -28,8 +28,8 @@ router.post('/', async (req, res) => {
         isNaN(data.capacity) ||
         isNaN(data.free_places) ||
         data.date === undefined || data.date.trim() === "" ||
-        data.time === undefined || data.time.trim() === ""
-    ) {
+        data.time === undefined || data.time.trim() === "" 
+) {
         res.status(400).send("Bad input");
         return;
     }
@@ -49,7 +49,7 @@ router.put('/:id', async (req, res) => {
         isNaN(data.capacity) ||
         isNaN(data.free_places) ||
         data.date === undefined || data.date.trim() === "" ||
-        data.time === undefined || data.time.trim() === ""
+        data.time === undefined || data.time.trim() === "" 
     ) {
         res.status(400).send("Bad input");
         return;

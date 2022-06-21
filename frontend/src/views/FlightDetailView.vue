@@ -20,6 +20,10 @@
         type="time"
         label="Time"
       ></v-text-field>
+      <v-text-field
+          v-model="flight.flight_progress"
+          label="Flight progress"
+      ></v-text-field>
         <v-btn @click="changeFlight(flight.id, flight)" color="green">Change</v-btn>
     </v-form>
   </div>
@@ -80,9 +84,9 @@ export default {
 
       await this.flightStore.changeFlight(this.id, flight);
 
-
       await this.notificationStore.addNotification("Change flight: " + flight.name,
-          " date: " + flight.date + " Time: " + flight.time, "info");
+          " date: " + flight.date + " Time: " + flight.time
+          + " Flight progress: " + flight.flight_progress, "info");
 
       let lastIdNotification = this.notificationStore.notifications[0].id + 1;
       if(lastIdNotification < 1) lastIdNotification = 1;

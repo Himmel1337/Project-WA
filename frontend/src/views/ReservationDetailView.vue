@@ -9,7 +9,8 @@
 
           <h2>Flight: {{ flight.name }}</h2>
           <h3>Date: {{ flight.date }} Time: {{ flight.time }}</h3>
-          <h3>Free Places: {{ flight.capacity }}/{{ flight.free_places }}</h3><br>
+          <h3>Free Places: {{ flight.capacity }}/{{ flight.free_places }}</h3>
+          <h3>Flight Progress: {{ flight.flight_progress }} </h3><br>
 
     <v-row>
       <v-col cols="4" v-for="user in users_username">
@@ -209,15 +210,39 @@ export default {
     },
 
     arrayUsersId() {
-      let arrayUsersId = [];
-      const n = this.userStore.users.length;
+      let reservation_id = parseInt(this.$route.params.id);
+      let users_id = [];
+      let n = this.reservation_userStore.reservation_users.length
 
-      for (let i = 2; i < n; i++){
-        arrayUsersId.push(this.userStore.users[i].id);
+      for (let i = 0; i < n; i++) {
+        if (this.reservation_userStore.reservation_users[i].reservation_id === reservation_id) {
+          users_id.push(this.reservation_userStore.reservation_users[i]);
+        }
       }
 
-      return arrayUsersId;
+      n = users_id.length;
+      let users_username = [];
+
+      for (let i = 0; i < n; i++) {
+        for (let j = 0; j < this.userStore.users.length; j++) {
+          if (users_id[i].user_id === this.userStore.users[j].id) {
+            users_username.push(this.userStore.users[j].id);
+          }
+        }
+      }
+
+      let  arrayUsersId = [];
+      for (let i = 0; i < users_username.length; i++){
+        for (let j = 2; j < this.userStore.users.length; j++) {
+          if (users_username[i] != this.userStore.users[j].id) {
+            arrayUsersId.push(this.userStore.users[j].id);
+          }
+        }
+      }
+
+      return  arrayUsersId;
     },
+
 
     arrayUsers() {
       let arrayUsers = [];

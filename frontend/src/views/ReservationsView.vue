@@ -12,6 +12,7 @@
 
   <error v-if="reservationStore.error" :text="reservationStore.error" @hide="reservationStore.clearError()"></error>
   <v-alert type="warning" v-else-if="reservationStore.loginMessage" class="mb-7">{{ reservationStore.loginMessage }}</v-alert>
+
   <v-progress-circular v-if="reservationStore.isLoading" color="primary" indeterminate size="100" width="10" class="ma-5"/>
   <div v-else-if="reservationStore.reservations.length === 0">No reservations.</div>
   <div v-else>
@@ -20,10 +21,10 @@
     </div>
     <div v-else>
       <v-row>
-        <v-col cols="4" v-for="reservation in reservations()">
+        <v-col cols="4" v-for="reservation in getUserReservations()">
           <v-card>
             <router-link :to="{name: 'reservation-detail', params: {id: reservation.id}}">
-              <v-img src="https://static.scientificamerican.com/sciam/assets/Image/INLINE%20IMAGE%204%20-%2048954138962_9813a1461d_o.jpg"></v-img>
+              <v-img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeebp-15PyoHz879-3YHynilQhJi6ohS2Pjg&usqp=CAU"></v-img>
             </router-link>
 
             <v-card-header>
@@ -79,24 +80,75 @@ export default {
   },
   methods: {
 
-    reservations(){
+    getUserReservations(){
+
       const user_id = localStorage.getItem('logedUserId')
+
       let reservations = [];
       let j = 0;
-      for (let i = 0; i < this.reservation_userStore.reservation_users.length; i++){
+      let n = this.reservation_userStore.reservation_users.length
+      for (let i = 0; i < n; i++){
         if (this.reservation_userStore.reservation_users[i].user_id == user_id){
+
           while (this.reservationStore.reservations[j].id !=
               this.reservation_userStore.reservation_users[i].reservation_id &&
               this.reservationStore.reservations.length > j
               ){
             j++;
           }
-          reservations.push(this.reservationStore.reservations[j]);
+
+          let pom = this.reservationStore.reservations[j];
+          reservations.push(pom);
           j = 0;
         }
       }
+
       return reservations;
     },
+
+
+    async deleteReservation(reservation){
+
+      // add new notiication
+      await this.notificationStore.addNotification("Delete reservation: " + reservation.name, " Reservation was removed "
+          , "warning");
+
+      let lastIdNotification = this.notificationStore.notifications[0].id + 1;
+      if(lastIdNotification < 1) lastIdNotification = 1;
+
+      for (let i = 0; i < this.userStore.users.length; i++){
+        await this.notification_userStore.addNotification_user(lastIdNotification, this.userStore.users[i].id);
+      }
+
+      // delete reservation_user
+      let n = this.reservation_userStore.reservation_users.length
+      for (let i = 0; i < n; i++) {
+        if(reservation.id === this.reservation_userStore.reservation_users[i].reservation_id){
+          this.reservation_userStore.delete(this.reservation_userStore.reservation_users[i].id);
+        }
+      }
+
+      // free_places
+      let i = 0;
+      while (i < this.flightStore.flights.length && this.flightStore.flights[i].id
+      != reservation.flight_id){
+        i++;
+      }
+      let pomFlight = this.flightStore.flights[i];
+      let users_id = [];
+      for (let i = 0; i < this.reservation_userStore.reservation_users.length; i++) {
+        if (this.reservation_userStore.reservation_users[i].reservation_id === reservation.id) {
+          users_id.push(this.reservation_userStore.reservation_users[i]);
+        }
+      }
+      pomFlight.free_places += users_id.length;
+      this.flightStore.changeFlight(pomFlight.id, pomFlight)
+
+      // delete reservation
+      this.reservationStore.delete(reservation.id);
+    },
+
+
 
     addReservation() {
       this.$router.push({name: 'addReservation'});
@@ -110,40 +162,6 @@ export default {
 
     getRole() {
       return localStorage.getItem('logedUserRole');
-    },
-
-    async deleteReservation(reservation){
-
-      await this.notificationStore.addNotification("Delete reservation: " + reservation.name, " Flight was removed "
-          , "warning");
-
-      let lastIdNotification = this.notificationStore.notifications[0].id + 1;
-      if(lastIdNotification < 1) lastIdNotification = 1;
-
-      for (let i = 0; i < this.userStore.users.length; i++){
-        await this.notification_userStore.addNotification_user(lastIdNotification, this.userStore.users[i].id);
-      }
-
-      let i = 0;
-
-      while (i < this.flightStore.flights.length && this.flightStore.flights[i].id
-      != reservation.flight_id){
-        i++;
-      }
-
-      let pomFlight = this.flightStore.flights[i];
-      let users_id = [];
-
-      for (let i = 0; i < this.reservation_userStore.reservation_users.length; i++) {
-        if (this.reservation_userStore.reservation_users[i].reservation_id === reservation.id) {
-          users_id.push(this.reservation_userStore.reservation_users[i]);
-        }
-      }
-
-      pomFlight.free_places += users_id.length;
-      this.flightStore.changeFlight(pomFlight.id, pomFlight)
-
-      this.reservationStore.delete(reservation.id);
     },
   }
 }
